@@ -36,3 +36,23 @@ export type BlurHandler = (
     HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
   >
 ) => void;
+
+
+/* ----------- Form data types ----------- */
+export interface BaseFormProps extends React.ComponentProps<"form"> {
+  children: React.ReactNode
+}
+
+export interface FormHeaderProps {
+  title: string
+  description?: string
+  action?: React.ReactNode
+}
+
+export interface FormBodyProps {
+  children: React.ReactNode
+}
+
+export interface FormFooterProps {
+  children: React.ReactNode
+}

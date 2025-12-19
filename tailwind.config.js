@@ -7,10 +7,11 @@ export default {
         extend: {
             colors: {
                 light: "#f6f6f6",     // Ligh Color
-                brand: '#098f6d',     // Observatory Color (logo color)
-                dark: '#11211C',      // Dark Aztec Green Color
-                dark_secondary: "#0c0f12", // Darker Shade for dark mode backgrounds
-                light_secondary: "#f3f4f6",
+                brand: '#95adff',     // Blue Color (logo color)
+                brandHover: '#8296d9',   
+                primaryColor: '#f75ec3',   // Pink Color  
+                primaryColorHover: '#fc86b7',   
+                dark: '#1f0d1d',      // Dark pink Color,
         },
         boxShadow: {
             // pixel: '', 
