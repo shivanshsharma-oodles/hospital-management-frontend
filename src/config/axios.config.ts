@@ -4,6 +4,7 @@ import axios, {
   type AxiosError,
 } from "axios";
 import { env } from "./env.config";
+import { storage } from "@/utils/storageFetch";
 
 // Public Api Instance for unauthenticated requests.
 const publicApi: AxiosInstance = axios.create({
@@ -32,7 +33,7 @@ const privateApi: AxiosInstance = axios.create({
 privateApi.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     // Retreive Token from LS (If Not Cookies)
-    const token = localStorage.getItem("authToken");
+    const token = storage.get("authToken");
 
     // If token exists and headers are present, set Authorization header.
     if (token && config.headers) {

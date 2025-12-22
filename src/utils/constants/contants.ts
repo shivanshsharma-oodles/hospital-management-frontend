@@ -1,3 +1,5 @@
+import type { AdminSection } from "@/types";
+
 export const APP = {
     NAME: "Hospital Management",
     ADMIN_NAME: "Hospital Management Admin",
@@ -18,38 +20,12 @@ export const NAVBAR = {
     ],
 } as const;
 
-export const SIGNUPFORM = {
-    TITLE: "Create an Account",
-    DESCRIPTION: "Sign up to access all features",
-    SUBMIT_BUTTON_TEXT: "Sign Up",
-    FOOTER_TEXT: "Already have an account? ",
-    FOOTER_LINK_TEXT: "Log in",
-    FOOTER_LINK_HREF: "/",
-}
-
-export const LOGINFORM = {
-    TITLE: "Welcome back",
-    DESCRIPTION: "Login to your account",
-    SUBMIT_BUTTON_TEXT: "Login",
-    FOOTER_TEXT: "New to our platform? ",
-    FOOTER_LINK_TEXT: "Sign up",
-    FOOTER_LINK_HREF: "/signup",
-} as const;
-
-
-export const ADMINLOGINFORM = {
-    TITLE: "Welcome back",
-    DESCRIPTION: "Login to your admin account",
-    SUBMIT_BUTTON_TEXT: "Login as admin",
-} as const;
 
 export const ADMIN_DASH_SIDEBAR_BUTTONS = [
-    {
-        BUTTON_TEXT: "Departments", 
-        ON_CLICK: () => {}
-    },
-    {
-        BUTTON_TEXT: "Doctors", 
-        ON_CLICK: () => {}
-    }
+    { key: "departments" as AdminSection, label: "Departments" },
+    { key: "doctors" as AdminSection, label: "Doctors"},
+    { key: "patients" as AdminSection, label: "Patients"},
+    { key: "appointments" as AdminSection, label: "Appointments"},
+    { key: "bills" as AdminSection, label: "Bills"},
+    { key: "medical-records" as AdminSection, label: "Medical Records"},
 ]

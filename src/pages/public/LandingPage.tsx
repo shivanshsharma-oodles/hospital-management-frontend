@@ -15,7 +15,7 @@ const LandingPage = () => {
   return (
     <>
       <NavBar OnSignInClick={() => setShowSignIn(!showSignIn)} OnRegisterClick={() => setShowRegister(!showRegister)} />
-      <main id="main" className="min-h-dvh">
+      <main id="main">
         <AuthPage />
         <About />
       </main>

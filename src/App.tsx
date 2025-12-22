@@ -4,7 +4,7 @@ import React from 'react'
 
 function App() {
   return (
-    <div className="relative overflow-hidden min-h-screen ">
+    <div className="relative h-screen overflow-hidden">
       <AppRoutes />
       <Toaster
         position='bottom-right'

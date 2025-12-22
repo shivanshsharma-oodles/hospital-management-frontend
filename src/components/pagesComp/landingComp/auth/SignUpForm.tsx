@@ -6,7 +6,7 @@ import FormFooter from "@/components/ui/form/FormFooter";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { SIGNUPFORM } from "@/utils/constants/contants";
+import { SIGNUPFORM } from "@/utils/constants";
 import { Link, useNavigate } from "react-router-dom";
 import { signup } from "@/services/spring-apis/auth.service";
 import { showError, showSuccess } from "@/utils/toast";

@@ -36,9 +36,15 @@ export interface HeroProps {
 
 /* ---------- Base Component Props ---------- */
 export interface ActionCardProps {
-  title: string;
-  description: string;
-  icon: React.ReactNode;
-  onClick: () => void;
+  title?: string;
+  description?: string;
+  icon?: React.ReactNode;
+  onClick?: () => void;
   className?: string;
+  size?: "small" | "medium" | "large"
 }
+
+/* ---------- Component Switch Props (State Lifting) ---------- */
+
+// Admin Sidebar
+export type AdminSection = "departments" | "doctors";

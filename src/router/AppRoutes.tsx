@@ -14,26 +14,45 @@ import AppLayout from '@/layout/AppLayout';
 // Invalid Route
 import NotFound from "@/pages/NotFound";
 import AdminDashboard from '@/pages/admin/AdminDashboard';
+import AddDoctorPage from '@/pages/admin/AddDoctorPage';
+import DoctorDashboard from '@/pages/doctor/DoctorDashboard';
+import ProtectedLayout from '@/layout/ProtectedLayout';
+import PublicAuthLayout from '@/layout/PublicAuthLayout';
+import ChooseRolePage from '@/pages/ChooseRolePage';
+import RootRedirect from '@/layout/RootRedirect';
+import DoctorAppointmentsPage from '@/pages/doctor/DoctorAppointmentsPage';
 
 const AppRoutes = () => {
     return (
         <BrowserRouter>
-        <AppLayout>
-            <Routes>
-                <Route path="/" element={<LandingPage />} />
-                <Route path="/signup" element={<LandingPage />} />
+            <AppLayout>
+                <Routes>
 
-                <Route path="/admin-secure-login" element={<AdminLandingPage />} />
+                    <Route path="/" element={<RootRedirect />} />
 
-                {/* ::: Private Routes ::: */}
-                {/* <Route element={<ProtectedLayout />}> */}
-                    {/* <Route path="/dashboard" element={<Dashboard />} /> */}
-                    <Route path="/admin-dashboard" element={<AdminDashboard />} />
-                {/* </Route> */}
+                    <Route element={<PublicAuthLayout />}>
+                        <Route path="/login" element={<LandingPage />} />
+                        <Route path="/signup" element={<LandingPage />} />
+                        <Route path="/admin-secure-login" element={<AdminLandingPage />} />
+                    </Route>
 
-                <Route path="*" element={<NotFound />} />
-            </Routes>
-        </AppLayout> 
+                    {/* ::: Private Routes ::: */}
+                    <Route element={<ProtectedLayout />}>
+                        <Route path="/choose-role" element={<ChooseRolePage />} />
+
+                        {/* DOCTOR */}
+                        <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
+                        <Route path="/doctor/appointments" element={<DoctorAppointmentsPage />} />
+
+
+                        {/* ADMIN */}
+                        <Route path="/admin-dashboard" element={<AdminDashboard />} />
+                        <Route path="/admin/doctor" element={<AddDoctorPage />} />
+                    </Route>
+
+                    <Route path="*" element={<NotFound />} />
+                </Routes>
+            </AppLayout>
         </BrowserRouter>
 
     )

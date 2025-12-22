@@ -11,7 +11,7 @@ interface NavbarProps {
 const NavBar = ({ OnSignInClick, OnRegisterClick }: NavbarProps) => {
   return <>
       <Navbar01
-        logo={<Logo className="w-26 h-16" />}
+        logo={<Logo className="w-24 h-14" />}
         logoHref="#"
         signInText="Sign In"
         onSignInClick={OnSignInClick}

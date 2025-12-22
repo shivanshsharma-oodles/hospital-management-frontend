@@ -31,7 +31,7 @@ const BaseDialogModal = ({
 }: BaseDialogModalProps) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent showCloseButton={showCross} className="sm:max-w-md bg-dark">
+      <DialogContent showCloseButton={showCross} className="sm:max-w-md bg-light">
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
           {description && (

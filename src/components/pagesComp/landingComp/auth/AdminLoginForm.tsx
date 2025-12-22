@@ -6,14 +6,16 @@ import FormFooter from "@/components/ui/form/FormFooter";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ADMINLOGINFORM } from "@/utils/constants/contants";
+import { ADMINLOGINFORM } from "@/utils/constants";
 import { useNavigate } from "react-router-dom";
 import { adminLogin } from "@/services/spring-apis/auth.service";
 import { showError, showSuccess } from "@/utils/toast";
+import { useActiveRole } from "@/con/ActiveRoleContext";
 
 const AdminLoginForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const {setActiveRole} = useActiveRole();
     const navigate = useNavigate();
 
     // Handle Login
@@ -31,6 +33,7 @@ const AdminLoginForm = () => {
                 await adminLogin(payload);
                 showSuccess("Admin login successful!", "admin-login-success");
                 // Navigate to admin dashboard after login
+                setActiveRole("ADMIN");
                 navigate("/admin-dashboard", { replace: true });
                 return;
         } catch (error) {

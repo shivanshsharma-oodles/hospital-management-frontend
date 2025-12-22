@@ -21,7 +21,7 @@ const Loader = ({
   const variants: Record<VariantType, JSX.Element> = {
     modern: (
       <div className={`relative ${sizeMap[size]}`}>
-        <div className="h-full w-full rounded-full border-4 dark:border-gray-900 border-gray-200"></div>
+        <div className="h-full w-full rounded-full border-4 dark:border-pink-900 border-pink-200"></div>
         <div className="absolute top-0 left-0 h-full w-full rounded-full border-4 border-transparent border-t-gray-600 border-r-gray-700 dark:border-t-gray-400 dark:border-r-gray-200 animate-spin"></div>
       </div>
     ),
@@ -33,9 +33,9 @@ const Loader = ({
 
     dots: (
       <div className="flex gap-2">
-        <div className="h-3 w-3 rounded-full bg-teal-200 animate-bounce animation-delay-100"></div>
-        <div className="h-3 w-3 rounded-full bg-teal-400 animate-bounce animation-delay-150"></div>
-        <div className="h-3 w-3 rounded-full bg-teal-600 animate-bounce animation-delay-200"></div>
+        <div className="h-3 w-3 rounded-full bg-pink-200 animate-bounce animation-delay-100"></div>
+        <div className="h-3 w-3 rounded-full bg-pink-300 animate-bounce animation-delay-150"></div>
+        <div className="h-3 w-3 rounded-full bg-pink-400 animate-bounce animation-delay-200"></div>
       </div>
     ),
   };

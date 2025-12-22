@@ -1,5 +1,5 @@
-import { publicApi } from "@/config/axios.config";
-import type { LoginPayload, LoginResponse, SignupPayload, SignupResponse } from "@/types/api.types";
+import { privateApi, publicApi } from "@/config/axios.config";
+import type { AuthUserResponse, LoginPayload, LoginResponse, SignupPayload, SignupResponse } from "@/types/api.types";
 import { storage } from "@/utils/storageFetch";
 
 export const signup = async (
@@ -27,3 +27,8 @@ export const adminLogin = async (
     storage.set('authToken', response.data.jwt);
     return response.data;
 }
+
+export const getAuthMe = async (): Promise<AuthUserResponse> => {
+  const res = await privateApi.get("/auth/me");
+  return res.data;
+};

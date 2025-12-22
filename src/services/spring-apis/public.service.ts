@@ -1,6 +1,5 @@
-import { privateApi, publicApi } from "@/config/axios.config";
-import type { BaseDepartmentPayload, DepartmentResponse } from "@/types";
-import { storage } from "@/utils/storageFetch";
+import { publicApi } from "@/config/axios.config";
+import type { BaseDoctorResponse, DepartmentResponse } from "@/types";
 
 
 export const fetchDepartments = async (
@@ -16,3 +15,17 @@ export const DepartmentById = async (
     return response.data;
 }
 
+
+/* Doctor Public APIs */
+
+// Get All Doctors
+export const getAllDoctors = async() : Promise<BaseDoctorResponse[]> =>  {
+    const response = await publicApi.get("/doctors");
+    return response.data;
+}
+
+// Doctor by Id
+export const getDoctorById = async(id: string) : Promise<BaseDoctorResponse> =>  {
+    const response = await publicApi.get(`/doctors/${id}`);
+    return response.data;
+}

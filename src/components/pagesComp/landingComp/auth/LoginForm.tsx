@@ -6,8 +6,8 @@ import FormFooter from "@/components/ui/form/FormFooter";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { LOGINFORM } from "@/utils/constants/contants";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { LOGINFORM } from "@/utils/constants";
+import { Link, useNavigate } from "react-router-dom";
 import {login } from "@/services/spring-apis/auth.service";
 import { showError, showSuccess } from "@/utils/toast";
 
@@ -28,14 +28,15 @@ const LoginForm = () => {
         };
 
         try {
-            await login(payload);
+            const res = await login(payload);
             showSuccess("Login successful!", "login-success");
             // Navigate to dashboard (Doctor/Patient]) after login
-            navigate("/dashboard", { replace: true });
+            
+            navigate("/", { replace: true });
 
         } catch (error) {
             console.error("Login failed:", error);
-            showError(error.response.data.error, "login-failure");
+            showError(error.response.data.error || "Login Failed", "login-failure");
         }
     }
 

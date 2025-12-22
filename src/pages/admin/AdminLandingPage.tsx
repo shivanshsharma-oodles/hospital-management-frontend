@@ -11,7 +11,7 @@ const AdminLandingPage = () => {
     return (
         <>
             <Navbar01 showNavLinks={false} showButtons={false} logo={<Logo className="w-26 h-16" />} appName={APP.ADMIN_NAME} />
-            <main id="main" className=" min-h-dvh">
+            <main id="main" className="min-h-dvh">
 
                 <AuthPage variant="admin" />
                 {/* <About /> */}

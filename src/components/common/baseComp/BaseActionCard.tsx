@@ -2,36 +2,61 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import type { ActionCardProps } from "@/types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
-
+import { SIZE_STYLES } from "@/utils/constants/styles.constants";
 const BaseActionCard = ({
   title,
   description,
   icon,
   onClick,
-  className = "max-w-md",
+  className,
+  size = "medium",
 }: ActionCardProps) => {
+  const styles = SIZE_STYLES[size];
+
   return (
     <Card
       onClick={onClick}
       className={cn(
-        "border-dashed border-2 cursor-pointer transition-colors group",
-        "hover:border-primary/50 hover:bg-accent/5",
+        "border-dashed border-2 border-gray-300 cursor-pointer transition-all duration-300 group",
+        "hover:border-dark/50 hover:shadow-md",
+        styles.card,
         className
       )}
     >
-      <CardHeader className="flex flex-row items-center justify-between pb-3">
-        <CardTitle className="text-sm font-medium text-muted-foreground group-hover:text-foreground">
+      <CardHeader className="px-4 py-2">
+        <CardTitle
+          className={cn(
+            "text-center font-semibold text-gray-700 group-hover:text-gray-900 transition-colors",
+            styles.title
+          )}
+        >
           {title}
         </CardTitle>
-        {icon}
       </CardHeader>
 
-      <CardContent className="flex flex-col items-center justify-center gap-3 py-8">
-        <div className="rounded-full bg-accent p-3 group-hover:bg-primary/10">
-          {icon}
-        </div>
-        <p className="text-sm text-muted-foreground group-hover:text-foreground">
+      <CardContent
+        className={cn(
+          "flex flex-col items-center justify-between py-2 px-4",
+          styles.gap
+        )}
+      >
+
+        {icon && (
+          <div
+            className={cn(
+              "rounded-full bg-gray-100 group-hover:bg-primary/10 transition-colors",
+              styles.iconWrapper
+            )}
+          >
+            {icon}
+          </div>
+        )}
+        <p
+          className={cn(
+            "text-center text-gray-600 group-hover:text-gray-800 transition-colors",
+            styles.description
+          )}
+        >
           {description}
         </p>
       </CardContent>

@@ -25,7 +25,7 @@ export default function BaseTwoColumnLayout({
   return (
       <ResizablePanelGroup
         orientation="horizontal"
-        className="h-screen flex-1 w-full"
+        className="h-full flex-1 w-full"
       >
         {/* LEFT PANEL (Sidebar) */}
         <ResizablePanel defaultSize={20} minSize={!resize ? 200 : minSize} maxSize={!resize ? 200 : maxSize }>
@@ -44,7 +44,7 @@ export default function BaseTwoColumnLayout({
 
         {/* RIGHT PANEL (Main content) */}
         <ResizablePanel defaultSize={80} minSize={30}>
-          <div className="h-full p-4 overflow-auto">
+          <div className="h-full p-4 overflow-y-auto">
             {RightComponent ? (
               RightComponent
             ) : (
