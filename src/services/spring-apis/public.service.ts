@@ -29,3 +29,9 @@ export const getDoctorById = async(id: string) : Promise<BaseDoctorResponse> => 
     const response = await publicApi.get(`/doctors/${id}`);
     return response.data;
 }
+
+// Doctors by Department Id
+export const getAllDoctorsByDeptId = async(id: number) : Promise<BaseDoctorResponse[]> =>  {
+    const response = await publicApi.get(`/doctors/department/${id}`);
+    return response.data;
+}

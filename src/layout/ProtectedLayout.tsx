@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useAuthUser } from "@/hooks/useAuthUser";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import Loader from "@/components/common/Loader";
-import { useActiveRole } from "@/con/ActiveRoleContext";
+import { useActiveRole } from "@/context/ActiveRoleContext";
 
 /**
  * ProtectedLayout Component
@@ -17,12 +17,21 @@ const ProtectedLayout = () => {
   const { activeRole, setActiveRole } = useActiveRole();
   const location = useLocation();
 
+  useEffect(() => {
+    // If activeRole is set, but the User is not in actual roles
+    if (activeRole && roles.length > 0 && !roles.includes(activeRole)) {
+      console.warn("Security Alert: Role Mismatch/Manipulation detected.");
+      setActiveRole(null); // Reset active role
+    }
+  }, [activeRole, roles, setActiveRole]);
+
   /**
    * Effect: Automatic Role Assignment
    * * If the authenticated user possesses exactly one role and no active role is currently set,
    * automatically set that role as the active role. This bypasses the selection screen
    * for a seamless user experience.
    */
+
   useEffect(() => {
     if (!activeRole && roles.length === 1) {
       setActiveRole(roles[0]);

@@ -5,13 +5,13 @@ import type { FormHeaderProps } from "@/types"
 
 
 const FormHeader = ({ title, description, action }: FormHeaderProps) => {
-  return (
+  return (    
     <CardHeader>
       
-      <div>
+      <div className="my-4">
         <CardTitle>{title}</CardTitle>
         {description && (
-          <CardDescription>{description}</CardDescription>
+          <CardDescription className="mt-3">{description}</CardDescription>
         )}
       </div>
 

@@ -25,5 +25,5 @@ export const useGetAppointments = () => {
         loadDepartments();
     }, []);
 
-    return { appointments, loadingAppointments, error };
+    return { appointments,setAppointments, loadingAppointments, error };
 };

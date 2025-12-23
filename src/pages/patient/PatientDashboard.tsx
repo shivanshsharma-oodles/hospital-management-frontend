@@ -1,43 +1,44 @@
 import React, { useEffect, useState } from 'react'
 import Loader from '@/components/common/Loader';
-import DoctorNavbar from '@/components/pagesComp/doctor/DoctorNavbar'
-import { fetchDoctor } from '@/services/spring-apis/doctor.service';
-import type { CompleteDoctorResponse } from '@/types';
+import PatientNavbar from '@/components/pagesComp/patient/PatientNavbar'
+import type { CompletePatientResponse } from '@/types';
 import { showError } from '@/utils/toast';
+import { fetchPatient } from '@/services/spring-apis/patient.service';
 
-const DoctorDashboard = () => {
+const PatientDashboard = () => {
   
-  const [doctor, setDoctor] = useState<CompleteDoctorResponse>(null);
+
+  const [patient, setPatient] = useState<CompletePatientResponse>(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const fetchDepartmentsAndDoctors = async () => {
+    const fetchDepartmentsAndPatients = async () => {
       try {
         setLoading(true);
-        const docResponse = await fetchDoctor();
-        setDoctor(docResponse);
+        const docResponse = await fetchPatient();
+        setPatient(docResponse);
       } catch (error) {
-        console.error('Error fetching doctor:', error);
+        console.error('Error fetching patient:', error);
         showError(error.response?.data?.error || "Could Not Fetch Your Data")
       } finally {
         setLoading(false);
       }
     };
-    fetchDepartmentsAndDoctors();
+    fetchDepartmentsAndPatients();
   }, [])
 
   if (loading) return <Loader variant='dots' />
 
   return (
-    <div className="h-screen overflow-auto bg-gray-50">
-      <DoctorNavbar doctor={doctor} />
+    <div className="h-screen overflow-auto ">
+      <PatientNavbar patient={patient} />
         
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
         {/* Welcome Section */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">
-            Welcome! Dr. {doctor?.name || 'Doctor'}
+            Welcome! {patient?.name || 'Patient'}
           </h1>
           <p className="text-gray-600 mt-1">Manage your practice efficiently</p>
         </div>
@@ -79,4 +80,4 @@ const DoctorDashboard = () => {
   )
 }
 
-export default DoctorDashboard
+export default PatientDashboard

@@ -1,4 +1,4 @@
-import type { AdminSection } from "@/types";
+import type { AdminSection, AppointmentStatus } from "@/types";
 
 export const APP = {
     NAME: "Hospital Management",
@@ -29,3 +29,10 @@ export const ADMIN_DASH_SIDEBAR_BUTTONS = [
     { key: "bills" as AdminSection, label: "Bills"},
     { key: "medical-records" as AdminSection, label: "Medical Records"},
 ]
+
+
+export const Appointmet_Tabs = [
+  { label: "Requests", value: "PENDING" as AppointmentStatus },
+  { label: "Scheduled", value: "SCHEDULED" as AppointmentStatus },
+  { label: "Completed", value: "COMPLETED" as AppointmentStatus },
+];

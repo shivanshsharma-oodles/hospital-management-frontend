@@ -6,17 +6,20 @@ import { Label } from "@/components/ui/label";
 import { Add_Doctor_Slot_Form } from "@/utils/constants";
 import { showError, showSuccess } from "@/utils/toast";
 import { addSlots } from "@/services/spring-apis/doctor.service";
+import type { AddSlotRequestPayload } from "@/types";
 
 interface AddDoctorSlotProps {
     open: boolean;
     onOpenChange: (open: boolean) => void;
+    onSuccess: () => Promise<void>
 }
 
 const AddDoctorSlots = ({
     open,
     onOpenChange,
+    onSuccess
 }: AddDoctorSlotProps) => {
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<AddSlotRequestPayload>({
         date: "",
         startTime: "",
         endTime: "",
@@ -35,9 +38,17 @@ const AddDoctorSlots = ({
 
         try {
             await addSlots(formData);
-            showSuccess("Slot Added", "slot-add-success");
+            showSuccess("Slot Added Successfully", "slot-add-success");
+
+            // reset form data
             resetData();
+            
+            // close modal
             onOpenChange(false);
+
+            // Refresh Parent List
+            onSuccess();
+
         } catch (error: any) {
             showError(error?.response?.data?.error || "Failed to add slot", "slot-add-failure");
         } finally {

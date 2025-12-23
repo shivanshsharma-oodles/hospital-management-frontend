@@ -2,7 +2,7 @@ import React from "react";
 import type { CompleteDoctorResponse } from "@/types";
 import CommonNavbar from "@/components/common/CommonNavbar";
 
-const DoctorNavbar = ({ doctor }: { doctor: CompleteDoctorResponse }) => {
+const DoctorNavbar = ({ doctor }: { doctor?: CompleteDoctorResponse }) => {
     return (
         <CommonNavbar
             user={{ name: doctor?.name, email: doctor?.email }}

@@ -2,6 +2,8 @@
 Reusable generic types used across multiple features
 */
 
+import type { AppointmentStatus } from "./api.types";
+
 // Mask log type
 export type maskValueType = string | number;
 

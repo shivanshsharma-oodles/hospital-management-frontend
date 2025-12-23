@@ -90,6 +90,7 @@ const SignupForm = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
+                <p className="text-red-700 text-xs"><span className="font-semibold">Note: </span>If this email already belongs to a doctor account, the password will not be changed.</p>
             </FormBody>
 
             <FormFooter>

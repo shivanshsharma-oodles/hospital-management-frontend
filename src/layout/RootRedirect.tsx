@@ -1,7 +1,7 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 import { useAuthUser } from "@/hooks/useAuthUser";
-import { useActiveRole } from "@/con/ActiveRoleContext";
+import { useActiveRole } from "@/context/ActiveRoleContext";
 
 const RootRedirect = () => {
   const { user, roles, loading } = useAuthUser();

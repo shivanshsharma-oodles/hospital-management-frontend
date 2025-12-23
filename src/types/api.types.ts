@@ -84,6 +84,7 @@ export interface SlotResponseType{
     date: string
     startTime: string
     endTime: string
+    isBooked?: boolean
 }
 
 
@@ -102,4 +103,41 @@ export interface AppointmentResponse{
 export interface PatientSummaryResponse {
     id: number
     name: string
+}
+
+export interface CompletePatientResponse extends PatientSummaryResponse {
+    email: string
+    address: Address
+    phone: string
+    dob: string
+    gender: Gender
+    createdAt: string
+}
+
+export interface CompletePatientResponse extends PatientSummaryResponse {
+    email: string
+    address: Address
+    phone: string
+    dob: string
+    gender: Gender
+    createdAt: string
+}
+
+export interface PatientRequestPayload {
+    name: string
+    address: Address
+    phone: string
+    dob: string
+    gender: Gender
+}
+
+export interface ProfileContext {
+    id: string
+    name: string
+    email: string
+    phone: string
+    dob: string
+    gender: Gender
+    address: Address
+    createdAt: string
 }

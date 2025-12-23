@@ -11,10 +11,15 @@ export const addDepartment = async (
     return response.data;
 }
 
+// Delete Department
+export const deleteDepartment = async (id: number) => {
+    await privateApi.delete(`/departments/${id}`)
+}
+
 /* Doctor APIs */
 
 // doctor by id
-export const getCompleteDoctorById = async(id: string) : Promise<CompleteDoctorResponse> =>  {
+export const getCompleteDoctorById = async(id: number) : Promise<CompleteDoctorResponse> =>  {
     const response = await privateApi.get(`/doctors/admin/${id}`);
     return response.data;
 }
@@ -26,7 +31,7 @@ export const createDoctor = async(payload : DoctorRequestPayload) : Promise<Comp
 }
 
 // delete doctor by id
-export const deleteDoctor = async(id: string) =>  {
+export const deleteDoctor = async(id: number) =>  {
     const response = await privateApi.delete(`/doctors/admin/${id}`);
     return response.data;
 }

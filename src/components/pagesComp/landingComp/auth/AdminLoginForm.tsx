@@ -10,7 +10,7 @@ import { ADMINLOGINFORM } from "@/utils/constants";
 import { useNavigate } from "react-router-dom";
 import { adminLogin } from "@/services/spring-apis/auth.service";
 import { showError, showSuccess } from "@/utils/toast";
-import { useActiveRole } from "@/con/ActiveRoleContext";
+import { useActiveRole } from "@/context/ActiveRoleContext";
 
 const AdminLoginForm = () => {
     const [email, setEmail] = useState("");

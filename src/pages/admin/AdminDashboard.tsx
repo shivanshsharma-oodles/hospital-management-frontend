@@ -1,15 +1,14 @@
-import { showError } from '@/utils/toast'
+import { showError, showSuccess } from '@/utils/toast'
 import Loader from '@/components/common/Loader'
-import { APP } from '@/utils/constants/contants'
 import React, { useEffect, useState } from 'react'
-import { Logo } from '@/components/design/LogoImage'
-import { Navbar01 } from '@/components/ui/shadcn-io/navbar-01'
 import BaseTwoColumnLayout from '@/layout/BaseTwoColumnLayout'
 import AddDoctor from '@/components/pagesComp/admin/AddDoctor'
 import Departments from '@/components/pagesComp/admin/Departments'
 import AdminSidebar from '@/components/pagesComp/admin/AdminSidebar'
 import { fetchDepartments, getAllDoctors } from '@/services/spring-apis/public.service'
 import { type AdminSection, type BaseDoctorResponse, type DepartmentResponse } from '@/types'
+import { deleteDepartment } from '@/services/spring-apis/admin.service'
+import CommonNavbar from '@/components/common/CommonNavbar'
 
 const AdminDashboard = () => {
 
@@ -19,6 +18,22 @@ const AdminDashboard = () => {
 
   const [activeSection, setActiveSection] = useState<AdminSection>("departments")
 
+  const handleDeleteDepartment = async (id: number) => {
+    try {
+      setLoading(true);
+      await deleteDepartment(id);
+      setDepartments(prev => prev.filter(dept => dept.id !== id));
+      showSuccess("Deleted Successfully", "delete success department");
+    } catch (error) {
+      showError(error.response.data.error || "Failed to delete", "delete-department-error")
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const handleAddDepartment = (newDepartment: DepartmentResponse) => {
+    setDepartments(prev => [newDepartment, ...prev]);
+  };
 
   useEffect(() => {
     const fetchDepartmentsAndDoctors = async () => {
@@ -42,20 +57,22 @@ const AdminDashboard = () => {
 
   return (
     <div className="flex flex-col h-screen overflow-hidden">
-      <Navbar01
-        showNavLinks={false}
-        showButtons={false}
-        logo={<Logo className="w-26 h-16" />}
-        appName={APP.ADMIN_NAME}
-      />
+      <CommonNavbar role = "ADMIN" />
 
       <div className="flex-1 min-h-0">
         <BaseTwoColumnLayout
           LeftComponent={<AdminSidebar activeSection={activeSection} onSelect={setActiveSection} />}
           RightComponent={
             <div className="w-full flex flex-col gap-5">
-              {activeSection === "departments" && <Departments departments={departments} />}
-              {activeSection === "doctors" && <AddDoctor doctors={doctors} />}
+              {
+                activeSection === "departments" &&
+                <Departments
+                  handleDeleteDepartment={handleDeleteDepartment}
+                  departments={departments}
+                  handleAddDepartment = {handleAddDepartment}
+                />}
+              {activeSection === "doctors" && <AddDoctor doctors={doctors} />
+              }
             </div>
           }
         />

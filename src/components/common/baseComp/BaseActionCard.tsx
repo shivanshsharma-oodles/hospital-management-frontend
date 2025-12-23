@@ -23,7 +23,7 @@ const BaseActionCard = ({
         className
       )}
     >
-      <CardHeader className="px-4 py-2">
+      <CardHeader className="px-4 pt-2">
         <CardTitle
           className={cn(
             "text-center font-semibold text-gray-700 group-hover:text-gray-900 transition-colors",

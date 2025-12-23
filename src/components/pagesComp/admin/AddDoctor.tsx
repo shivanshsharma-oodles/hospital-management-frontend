@@ -17,6 +17,7 @@ const AddDoctor = ({ doctors }: { doctors: BaseDoctorResponse[] }) => {
                     <CirclePlus className="h-6 w-6 text-muted-foreground group-hover:text-primary" />
                 }
                 onClick={() => navigate("/admin/doctor")}
+                size="small"
             />
 
             {/* All Departments */}
@@ -26,7 +27,6 @@ const AddDoctor = ({ doctors }: { doctors: BaseDoctorResponse[] }) => {
                         key={doc.id}
                         title={doc.name}
                         description={doc.department.name}
-                        size="small"
                     />
                 ))}
             </div>

@@ -7,15 +7,18 @@ import { Textarea } from "@/components/ui/textarea";
 import { ADD_DEPARTMENT_FORM } from "@/utils/constants";
 import { addDepartment } from "@/services/spring-apis/admin.service";
 import { showError, showSuccess } from "@/utils/toast";
+import type { DepartmentResponse } from "@/types";
 
 interface AddDepartmentModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  handleAddDepartment: (newDepartment: DepartmentResponse) => void
 }
 
 const AddDepartmentModal = ({
   open,
   onOpenChange,
+  handleAddDepartment
 }: AddDepartmentModalProps) => {
   const [formData, setFormData] = useState({
     name: "",
@@ -28,15 +31,16 @@ const AddDepartmentModal = ({
     setLoading(true);
 
     try {
-      // TODO: Add API call
+      // TODO: API call
       console.log("Form data:", formData);
-      await addDepartment(formData);
+      const createdDepartment = await addDepartment(formData);
 
       // After successful submission
       onOpenChange(false);
 
       // Reset form
       resetData()
+      handleAddDepartment(createdDepartment)
       showSuccess("Department Added", "department-add-success")
     } catch (error) {
       console.error("Error adding department:", error);

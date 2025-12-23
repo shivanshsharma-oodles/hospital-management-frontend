@@ -7,9 +7,9 @@ import type { BaseFormProps } from "@/types"
 
 const BaseForm = ({ className, children, ...props }: BaseFormProps) => {
   return (
-    <Card className={cn("w-full", className)}>
+    <Card className={cn(" w-full", className)}>
       <form
-        className="flex flex-col gap-6"
+        className="my-2 flex flex-col gap-6"
         {...props}
       >
         {children}

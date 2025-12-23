@@ -1,18 +1,18 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthUser } from "@/hooks/useAuthUser";
-import { useActiveRole } from "@/con/ActiveRoleContext";
+import { useActiveRole } from "@/context/ActiveRoleContext";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import type { Role } from "@/types";
 
 const ChooseRolePage = () => {
   const { roles } = useAuthUser();
   const { setActiveRole } = useActiveRole();
   const navigate = useNavigate();
 
-  const handleSelectRole = (role: "ADMIN" | "DOCTOR" | "PATIENT") => {
+  const handleSelectRole = (role: Role) => {
     setActiveRole(role);
-    navigate(`/${role.toLowerCase()}/dashboard`, { replace: true });
+    navigate(`/${role.toLowerCase()}-dashboard`, { replace: true });
   };
 
   return (
@@ -31,7 +31,7 @@ const ChooseRolePage = () => {
             >
               <CardContent className="flex flex-col items-center justify-center py-8">
                 <span className="text-lg font-medium">
-                  Continue as {role.charAt(0) + role.slice(1).toLowerCase()}
+                  Continue as {role.charAt(0) + role.slice(1).toLowerCase()} {/* Ex: DOCTOR -> Doctor */}
                 </span>
               </CardContent>
             </Card>

@@ -1,5 +1,5 @@
 import { privateApi } from "@/config/axios.config";
-import type { AddSlotRequestPayload, CompleteDoctorResponse, DoctorRequestPayload } from "@/types";
+import type { AddSlotRequestPayload, CompleteDoctorResponse, DoctorRequestPayload, SlotResponseType } from "@/types";
 
 /* Doctor Controller APIs */
 
@@ -18,4 +18,10 @@ export const updateDoctor = async(payload : DoctorRequestPayload) : Promise<Comp
 // Add Slots
 export const addSlots = async(payload : AddSlotRequestPayload) => {
     await privateApi.post('/doctors/slots', payload)
+}
+
+// Get Slots
+export const fetchMySlots = async() : Promise<SlotResponseType[]>=> {
+    const response = await privateApi.get('/doctors/slots');
+    return response.data;
 }

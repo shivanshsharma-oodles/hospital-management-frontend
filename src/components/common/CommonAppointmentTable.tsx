@@ -88,11 +88,11 @@ const CommonAppointmentTable = ({
                   )}
 
                   {/* CASE 1.1: PATIENT CANCEL REQUEST */}
-                  {statusView === "PENDING" && role === "PATIENT" && (
+                  {/* {statusView === "PENDING" && role === "PATIENT" && (
                     <Button size="sm" variant="ghost" className="text-muted-foreground" onClick={() => onAction(app.id, "CANCEL")}>
                       Cancel Request
                     </Button>
-                  )}
+                  )} */}
 
                   {/* CASE 2: SCHEDULED */}
                   {statusView === "SCHEDULED" && role === "DOCTOR" && (
