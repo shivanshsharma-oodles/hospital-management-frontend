@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { managePendingAppointment } from "@/services/spring-apis/common.service";
-import { showError, showSuccess } from "@/utils/toast";
 import type { AppointmentResponse } from "@/types";
+import { showError, showSuccess } from "@/utils/toast";
+import { managePendingAppointment } from "@/services/spring-apis/doctor.service";
+import { cancelAppointment } from "@/services/spring-apis/common.service";
 
 type UserRole = "DOCTOR" | "PATIENT";
 
@@ -26,17 +27,40 @@ export const useAppointmentActions = (
             if (role === "DOCTOR") {
                 switch (actionType) {
                     case "REJECT":
-                        await managePendingAppointment(id, "REJECTED");
-                        showSuccess("Request Rejected");
-                        setAppointments(prev => prev.filter(app => app.id !== id));
+                        try {
+                            await managePendingAppointment(id, "REJECTED");
+                            showSuccess("Request Rejected");
+                            setAppointments(prev => prev.filter(app => app.id !== id));
+                        } catch (error) {
+                            console.error(error);
+                            showError(error?.response?.data?.error || "Could not reject appointment")
+                        }
                         break;
 
                     case "ACCEPT":
-                        await managePendingAppointment(id, "SCHEDULED");
-                        showSuccess("Appointment Scheduled");
-                        setAppointments(prev => prev.map(app =>
-                            app.id === id ? { ...app, appointmentStatus: "SCHEDULED" } : app
-                        ));
+                        try {
+                            await managePendingAppointment(id, "SCHEDULED");
+                            showSuccess("Appointment Scheduled", "appointment-scheduled success");
+                            setAppointments(prev => prev.map(app =>
+                                app.id === id ? { ...app, appointmentStatus: "SCHEDULED" } : app
+                            ));
+                        } catch (error) {
+                            console.error(error);
+                            showError(error?.response?.data?.error || "Could not Accept appointment")
+                        }
+                        break;
+
+                    case "CANCEL":
+                        try {
+                            await cancelAppointment(id);
+                            showSuccess("Appointment Cancelled", "appointment-cancellation success");
+                            setAppointments(prev => prev.map(app =>
+                                app.id === id ? { ...app, appointmentStatus: "CANCELLED" } : app
+                            ));
+                        } catch (error) {
+                            console.error(error);
+                            showError(error?.response?.data?.error || "Could not Cancel appointment")
+                        }
                         break;
 
                     case "COMPLETE":
@@ -51,15 +75,16 @@ export const useAppointmentActions = (
             if (role === "PATIENT") {
                 switch (actionType) {
                     case "CANCEL":
-                        // Patient "Cancel" later
-                        // await cancelAppointment(id); // API call
-
-                        // Mock for test:
-                        await new Promise(r => setTimeout(r, 500));
-
-                        showSuccess("Appointment Cancelled");
-                        // List se hata do (either Pending or Scheduled)
-                        setAppointments(prev => prev.filter(app => app.id !== id));
+                        try {
+                            await cancelAppointment(id);
+                            showSuccess("Appointment Cancelled", "appointment-cancellation success");
+                            setAppointments(prev => prev.map(app =>
+                                app.id === id ? { ...app, appointmentStatus: "CANCELLED" } : app
+                            ));
+                        } catch (error) {
+                            console.error(error);
+                            showError(error?.response?.data?.error || "Could not Cancel appointment")
+                        }
                         break;
                 }
             }

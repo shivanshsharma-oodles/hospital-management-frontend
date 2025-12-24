@@ -15,7 +15,7 @@ const PublicAuthLayout = () => {
     if(user && activeRole){
         return (
             <Navigate
-            to={`${activeRole.toLowerCase()}-dashboard`}
+            to={`${activeRole.toLowerCase()}/dashboard`}
             replace/>
         )
     }

@@ -7,9 +7,9 @@ const PatientNavbar = ({ patient }: { patient?: CompletePatientResponse }) => {
         <CommonNavbar
             user={{ name: patient?.name, email: patient?.email }}
             links={[
-                { label: "Find Doctor", href: "/patient/find-doctor" },
+                { label: "Find Doctor", href: "/patient/departments" },
                 { label: "My Appointments", href: "/patient/appointments" },
-                { label: "Medical Records", href: "/patient/medical-records" }
+                { label: "Medical Records", href: "/patient/records" }
             ]}
         />
     );

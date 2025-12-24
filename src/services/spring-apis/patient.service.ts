@@ -1,7 +1,7 @@
 /* Patient Controller APIs */
 
 import { privateApi } from "@/config/axios.config";
-import type { CompletePatientResponse, PatientRequestPayload } from "@/types";
+import type { AppointmentResponse, CompletePatientResponse, PatientRequestPayload } from "@/types";
 
 // Get Patient
 export const fetchPatient = async() : Promise<CompletePatientResponse> =>  {
@@ -10,7 +10,12 @@ export const fetchPatient = async() : Promise<CompletePatientResponse> =>  {
 }
 
 // update patient
-export const updateDoctor = async(payload : PatientRequestPayload) : Promise<CompletePatientResponse> =>  {
+export const updatePatient = async(payload : PatientRequestPayload) : Promise<CompletePatientResponse> =>  {
     const response = await privateApi.put(`/patients`, payload);
+    return response.data;
+}
+
+export const bookAppointment = async(payload : {doctorSlotId: number}) : Promise<AppointmentResponse> => {
+    const response = await privateApi.post(`/appointments`, payload);
     return response.data;
 }

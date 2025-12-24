@@ -15,7 +15,7 @@ const AddDoctorPage = () => {
             />
 
             <main className='min-h-dvh'>
-                <AddDoctorForm showGoBack = {true} goBackRoute='/admin-dashboard' onSubmitSuccess={() => {}} />
+                <AddDoctorForm showGoBack = {true} goBackRoute='/admin/dashboard' onSubmitSuccess={() => {}} />
             </main>
         </div>
     )

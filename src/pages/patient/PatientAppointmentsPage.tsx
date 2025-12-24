@@ -5,10 +5,10 @@ import { useGetAppointments } from "@/hooks/useGetAppointments";
 import { useAppointmentActions } from "@/hooks/useAppointmentActions";
 import CommonAppointmentTable from "@/components/common/CommonAppointmentTable";
 
-const DoctorAppointmentsPage = () => {
+const PatientAppointmentsPage = () => {
     // 1. Data Fetching
     const { appointments, setAppointments, loadingAppointments, error } = useGetAppointments();
-    const { handleAction } = useAppointmentActions(setAppointments, "DOCTOR")
+    const { handleAction } = useAppointmentActions(setAppointments, "PATIENT")
 
     // 2. State: Default is 'SCHEDULED'
     const [currentView, setCurrentView] = useState<AppointmentStatus>("SCHEDULED");
@@ -28,7 +28,7 @@ const DoctorAppointmentsPage = () => {
                 <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                     <h1 className="text-2xl font-bold">Manage Appointments</h1>
 
-                    {/* --- THE 3 FILTER BUTTONS  --- */}
+                    {/* --- THE FILTER BUTTONS  --- */}
                     <div className="flex items-center bg-muted p-1 rounded-lg">
                         {Appointmet_Tabs.map((tab) => (
                             <button
@@ -53,7 +53,7 @@ const DoctorAppointmentsPage = () => {
                 <CommonAppointmentTable
                     data={filteredData}
                     statusView={currentView}
-                    role="DOCTOR"
+                    role="PATIENT"
                     onAction={handleAction}
                 />
             </div>
@@ -61,4 +61,5 @@ const DoctorAppointmentsPage = () => {
     );
 };
 
-export default DoctorAppointmentsPage;
+
+export default PatientAppointmentsPage

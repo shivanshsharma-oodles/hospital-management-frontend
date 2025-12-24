@@ -44,8 +44,9 @@ const CommonNavbar = ({ user, links, role }: CommonNavbarProps) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    storage.clear();
+    storage.clear("both");
     navigate("/", {replace: true})
+    window.location.reload();
   };
 
   return (

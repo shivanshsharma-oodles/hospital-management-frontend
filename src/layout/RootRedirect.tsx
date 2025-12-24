@@ -14,14 +14,14 @@ const RootRedirect = () => {
   }
 
   if (activeRole) {
-    return <Navigate to={`/${activeRole.toLowerCase()}-dashboard`} replace />;
+    return <Navigate to={`/${activeRole.toLowerCase()}/dashboard`} replace />;
   }
 
   if (roles.length > 1) {
     return <Navigate to="/choose-role" replace />;
   }
 
-  return <Navigate to={`/${roles[0].toLowerCase()}-dashboard`} replace />;
+  return <Navigate to={`/${roles[0].toLowerCase()}/dashboard`} replace />;
 };
 
 export default RootRedirect;

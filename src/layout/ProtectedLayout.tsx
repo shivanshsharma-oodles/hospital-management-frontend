@@ -70,7 +70,7 @@ const ProtectedLayout = () => {
   const roleNamespace = `/${activeRole.toLowerCase()}`;
   if (!location.pathname.startsWith(roleNamespace)) {
     // Redirect to the dashboard of the current active role
-    return <Navigate to={`${roleNamespace}-dashboard`} replace />;
+    return <Navigate to={`${roleNamespace}/dashboard`} replace />;
   }
 
   // 5. Render Authorized Content

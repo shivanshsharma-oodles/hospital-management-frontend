@@ -34,7 +34,7 @@ const AdminLoginForm = () => {
                 showSuccess("Admin login successful!", "admin-login-success");
                 // Navigate to admin dashboard after login
                 setActiveRole("ADMIN");
-                navigate("/admin-dashboard", { replace: true });
+                navigate("/admin/dashboard", { replace: true });
                 return;
         } catch (error) {
             console.error("Login failed:", error);

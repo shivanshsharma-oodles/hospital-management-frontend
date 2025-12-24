@@ -17,8 +17,8 @@ type UserRole = "DOCTOR" | "PATIENT";
 interface CommonAppointmentTableProps {
   data: AppointmentResponse[];
   statusView: AppointmentStatus; // Should be PENDING, SCHEDULED etc.
-  role: UserRole; // <--- Ye missing tha
-  onAction: (id: number, actionType: string) => void; 
+  role: UserRole;
+  onAction: (id: number, actionType: string) => void;
 }
 
 const CommonAppointmentTable = ({
@@ -62,10 +62,10 @@ const CommonAppointmentTable = ({
               {/* Column 2: Date & Time */}
               <TableCell>
                 <div className="flex flex-col">
-                    {/* FIXED: Accessed inside 'slot' object */}
+                  {/* FIXED: Accessed inside 'slot' object */}
                   <span>{app.slot.date}</span>
                   <div className="flex items-center">
-                    <span className="text-xs text-muted-foreground">{`${app.slot.startTime} - `}</span> 
+                    <span className="text-xs text-muted-foreground">{`${app.slot.startTime} - `}</span>
                     <span className="text-xs text-muted-foreground">{`${app.slot.endTime}`}</span>
                   </div>
                 </div>
@@ -88,19 +88,19 @@ const CommonAppointmentTable = ({
                   )}
 
                   {/* CASE 1.1: PATIENT CANCEL REQUEST */}
-                  {/* {statusView === "PENDING" && role === "PATIENT" && (
+                  {statusView === "PENDING" && role === "PATIENT" && (
                     <Button size="sm" variant="ghost" className="text-muted-foreground" onClick={() => onAction(app.id, "CANCEL")}>
                       Cancel Request
                     </Button>
-                  )} */}
+                  )}
 
                   {/* CASE 2: SCHEDULED */}
                   {statusView === "SCHEDULED" && role === "DOCTOR" && (
                     <>
-                      <Button size="sm" variant="outline" onClick={() => onAction(app.id, "UPDATE")}>
-                        <Edit className="w-4 h-4 mr-1" /> Update
+                      <Button size="sm" variant="outline" className="border-red-700 hover:bg-red-500 hover:text-white" onClick={() => onAction(app.id, "CANCEL")}>
+                        Cancel
                       </Button>
-                      <Button size="sm" className="bg-blue-600 hover:bg-blue-700" onClick={() => onAction(app.id, "COMPLETE")}>
+                      <Button size="sm" variant="outline" className="border-green-600 hover:bg-green-600 hover:text-white" onClick={() => onAction(app.id, "COMPLETE")}>
                         <CheckCircle className="w-4 h-4 mr-1" /> Complete
                       </Button>
                     </>

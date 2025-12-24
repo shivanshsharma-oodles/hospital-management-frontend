@@ -35,4 +35,5 @@ export const Appointmet_Tabs = [
   { label: "Requests", value: "PENDING" as AppointmentStatus },
   { label: "Scheduled", value: "SCHEDULED" as AppointmentStatus },
   { label: "Completed", value: "COMPLETED" as AppointmentStatus },
+  { label: "Cancelled", value: "CANCELLED" as AppointmentStatus },
 ];

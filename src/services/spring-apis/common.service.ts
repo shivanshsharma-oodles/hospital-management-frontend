@@ -1,16 +1,23 @@
 import { privateApi } from "@/config/axios.config";
-import type { AppointmentResponse } from "@/types";
+import type { AppointmentResponse, SlotResponseType } from "@/types";
 
 
 export const getAppointments = async (
-) : Promise<AppointmentResponse[]> => {
+): Promise<AppointmentResponse[]> => {
     const response = await privateApi.get(`appointments/me`);
     return response.data;
 }
 
-export const managePendingAppointment = async (
-    id: number, status: "SCHEDULED" | "REJECTED"
-) : Promise<AppointmentResponse> => {
-    const response = await privateApi.put(`/appointments/${id}/status`, status);
+export const cancelAppointment = async (
+    id: number, 
+) => {
+    const response = await privateApi.put(`/appointments/${id}/cancel`);
+    return response.data;
+}
+
+export const getSlotsByDoctorId = async (
+    doctorId: number
+): Promise<SlotResponseType[]> => {
+    const response = await privateApi.get(`/doctors/${doctorId}/slots`);
     return response.data;
 }

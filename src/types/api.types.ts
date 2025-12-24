@@ -88,7 +88,7 @@ export interface SlotResponseType{
 }
 
 
-export type AppointmentStatus = "PENDING" | "SCHEDULED" | "COMPLETED" | "REJECTED"
+export type AppointmentStatus = "PENDING" | "SCHEDULED" | "COMPLETED" | "REJECTED" | "CANCELLED"
 // Appointments
 export interface AppointmentResponse{
     id: number,

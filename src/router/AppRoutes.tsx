@@ -24,6 +24,12 @@ import DoctorAppointmentsPage from '@/pages/doctor/DoctorAppointmentsPage';
 import DoctorSlotsPage from '@/pages/doctor/SlotsPage';
 import PatientDashboard from '@/pages/patient/PatientDashboard';
 import PatientDepartmentsPage from '@/pages/patient/PatientDepartmentsPage';
+import DoctorLayout from '@/layout/DoctorLayout';
+import PatientLayout from '@/layout/PatientLayout';
+import PatientDoctorsPage from '@/pages/patient/PatientDoctorsPage';
+import PatientAppointmentsPage from '@/pages/patient/PatientAppointmentsPage';
+import PatientMedicalRecordPage from '@/pages/patient/PatientMedicalRecordPage';
+import AdminLayout from '@/layout/AdminLayout';
 
 const AppRoutes = () => {
     return (
@@ -36,7 +42,7 @@ const AppRoutes = () => {
                     <Route element={<PublicAuthLayout />}>
                         <Route path="/login" element={<LandingPage />} />
                         <Route path="/signup" element={<LandingPage />} />
-                        <Route path="/admin-secure-login" element={<AdminLandingPage />} />
+                        <Route path="/admin-login" element={<AdminLandingPage />} />
                     </Route>
 
                     {/* ::: Private Routes ::: */}
@@ -44,19 +50,29 @@ const AppRoutes = () => {
                         <Route path="/choose-role" element={<ChooseRolePage />} />
 
                         {/* DOCTOR */}
-                        <Route path="/doctor-dashboard" element={<DoctorDashboard />} />
-                        <Route path="/doctor/appointments" element={<DoctorAppointmentsPage />} />
-                        <Route path="/doctor/slots" element={<DoctorSlotsPage />} />
+                        <Route path="/doctor" element={<DoctorLayout />}>
+                            <Route path="dashboard" element={<DoctorDashboard />} />
+                            <Route path="appointments" element={<DoctorAppointmentsPage />} />
+                            <Route path="slots" element={<DoctorSlotsPage />} />
+                        </Route>
 
 
                         {/* ADMIN */}
-                        <Route path="/admin-dashboard" element={<AdminDashboard />} />
-                        <Route path="/admin/doctor" element={<AddDoctorPage />} />
+                        <Route path='/admin' element={<AdminLayout />}>
+                            <Route path="dashboard" element={<AdminDashboard />} />
+                            <Route path="doctor" element={<AddDoctorPage />} />
+                        </Route>
 
-            
+
                         {/* PATIENT */}
-                        <Route path="/patient-dashboard" element={<PatientDashboard />} />
-                        <Route path="/patient/find-doctor" element={<PatientDepartmentsPage />} />
+                        <Route path='/patient' element={<PatientLayout />}>
+                            <Route path='dashboard' element={<PatientDashboard />} />
+                            <Route path='departments' element={<PatientDepartmentsPage />} />
+                            <Route path='doctors' element={<PatientDoctorsPage />} />
+                            <Route path='appointments' element={<PatientAppointmentsPage />} />
+                            <Route path='records' element={<PatientMedicalRecordPage />} />
+                        </Route>
+
                     </Route>
 
                     <Route path="*" element={<NotFound />} />

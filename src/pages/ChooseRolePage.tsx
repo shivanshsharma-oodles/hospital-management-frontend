@@ -12,7 +12,7 @@ const ChooseRolePage = () => {
 
   const handleSelectRole = (role: Role) => {
     setActiveRole(role);
-    navigate(`/${role.toLowerCase()}-dashboard`, { replace: true });
+    navigate(`/${role.toLowerCase()}/dashboard`, { replace: true });
   };
 
   return (
