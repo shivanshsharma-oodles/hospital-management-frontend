@@ -11,9 +11,7 @@ interface SlotModalProps {
     onOpenChange: (open: boolean) => void;
     doctorId: number;
     doctorName: string;
-
 }
-
 
 const PatientSlotModal = ({
     open,

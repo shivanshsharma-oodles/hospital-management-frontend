@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { type AppointmentStatus } from "@/types";
 import { Appointmet_Tabs } from "@/utils/constants";
 import { useGetAppointments } from "@/hooks/useGetAppointments";
 import { useAppointmentActions } from "@/hooks/useAppointmentActions";
 import CommonAppointmentTable from "@/components/common/CommonAppointmentTable";
+import Loader from "@/components/common/Loader";
 
 const PatientAppointmentsPage = () => {
     // 1. Data Fetching
@@ -19,7 +20,7 @@ const PatientAppointmentsPage = () => {
     );
 
     // 4. Loading/Error Handling (User Experience ke liye important)
-    if (loadingAppointments) return <div className="p-6">Loading appointments...</div>;
+    if (loadingAppointments) return <Loader variant="encircle" size="lg" text="Loading Departments..." fullScreen={true} />;
     if (error) return <div className="p-6 text-red-500">Failed to load data.</div>;
 
     return (
@@ -60,6 +61,5 @@ const PatientAppointmentsPage = () => {
         </div>
     );
 };
-
 
 export default PatientAppointmentsPage

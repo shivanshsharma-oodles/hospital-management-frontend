@@ -8,7 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Check, X, Edit, Eye, CheckCircle } from "lucide-react";
+import { Check, X, Eye, CheckCircle, } from "lucide-react";
 import type { AppointmentResponse, AppointmentStatus } from "@/types";
 
 // Role type define kar diya clarity ke liye
@@ -46,7 +46,7 @@ const CommonAppointmentTable = ({
           {data.map((app) => (
             <TableRow key={app.id}>
 
-              {/* Column 1: Profile (Logic: Agar Doctor dekh rha hai to Patient ka naam dikhao, wies versa) */}
+              {/* Column 1: Profile (Logic: If Doctor page the show Patient naam dikhao, & vice versa) */}
               <TableCell className="font-medium">
                 <div className="flex items-center gap-3">
                   <div className="flex flex-col">
@@ -89,8 +89,13 @@ const CommonAppointmentTable = ({
 
                   {/* CASE 1.1: PATIENT CANCEL REQUEST */}
                   {statusView === "PENDING" && role === "PATIENT" && (
-                    <Button size="sm" variant="ghost" className="text-muted-foreground" onClick={() => onAction(app.id, "CANCEL")}>
-                      Cancel Request
+                    <Button size="sm" variant="outline" className="border-red-600 hover:bg-red-500 hover:text-white" onClick={() => onAction(app.id, "CANCEL")}>
+                      <X/>Cancel Request
+                    </Button>
+                  )}
+                  {statusView === "SCHEDULED" && role === "PATIENT" && (
+                    <Button size="sm" variant="outline" className="border-red-600 hover:bg-red-500 hover:text-white" onClick={() => onAction(app.id, "CANCEL")}>
+                      <X/>Cancel Appoinment
                     </Button>
                   )}
 

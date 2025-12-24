@@ -19,7 +19,8 @@ export const useGetAppointments = () => {
                 setError(error)
                 showError("Failed to load departments", "load-appointments-error");
             } finally {
-                setLoadingAppointments(false);
+                setTimeout(() => setLoadingAppointments(false), 3000)
+                
             }
         };
         loadDepartments();

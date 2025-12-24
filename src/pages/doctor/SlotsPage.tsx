@@ -5,16 +5,19 @@ import AddDoctorSlots from "@/components/pagesComp/doctor/AddDoctorSlots";
 import DoctorSlots from "@/components/pagesComp/doctor/DoctorSlots";
 import { showError } from "@/utils/toast";
 import type { SlotResponseType } from "@/types";
-import { fetchMySlots } from "@/services/spring-apis/doctor.service";
-import DoctorNavbar from "@/components/pagesComp/doctor/DoctorNavbar";
+import { deleteSlot, fetchMySlots } from "@/services/spring-apis/doctor.service";
+import BaseDialogModal from "@/components/common/baseComp/BaseDialogModal";
 
 const DoctorSlotsPage = () => {
     // 1. Local State for Data
     const [slots, setSlots] = useState<SlotResponseType[]>([]);
+    const [selectedSlotId, setSelectedSlotId] = useState<number | null>(null);
     const [loading, setLoading] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const [deleteLoading, setDeleteLoading] = useState(false);
 
-    // 2. Simple Fetch Function
+    // Simple Fetch Function
     const fetchSlots = async () => {
         try {
             setLoading(true);
@@ -22,11 +25,25 @@ const DoctorSlotsPage = () => {
             setSlots(response);
         } catch (error) {
             console.error(error);
-            showError("Failed to load slots", "load-slots-error");
+            showError(error?.response?.data?.error || "Failed to load slots", "load-slots-error");
         } finally {
             setLoading(false);
         }
     };
+
+    // Delete SLot
+    const handleSlotDelete = async (id: number) => {
+        try {
+            setDeleteLoading(true);
+            await deleteSlot(id);
+            setSlots(prev => prev.filter(slot => slot.id !== id))
+        } catch (error) {
+            console.error(error);
+            showError(error?.response?.data?.error || "Failed to delete slot", "delete-slot-error");
+        } finally {
+            setDeleteLoading(false);
+        }
+    }
 
     // 3. Load on Mount
     useEffect(() => {
@@ -48,7 +65,10 @@ const DoctorSlotsPage = () => {
                     slots={slots}
                     loading={loading}
                     // if need delete feature just pass the function
-                    onDelete={(id) => console.log("Delete logic here", id)}
+                    onDelete={(id) => {
+                        setSelectedSlotId(id);
+                        setIsDeleteModalOpen(true);
+                    }}
                 />
 
                 {/* Add Modal */}
@@ -57,6 +77,39 @@ const DoctorSlotsPage = () => {
                     onOpenChange={setIsModalOpen}
                     onSuccess={fetchSlots}
                 />
+
+                <BaseDialogModal
+                    open={isDeleteModalOpen}
+                    onOpenChange={setIsDeleteModalOpen}
+                    title="Confirm Delete Slot"
+                    description="Are you sure you want to delete slot."
+                >
+                    <div className="flex gap-2 flex-row justify-end">
+                        <Button
+                            variant="outline"
+                            className="border-primary"
+                            onClick={() => {
+                                setIsDeleteModalOpen(false);
+                                setSelectedSlotId(null);
+                            }}
+                        >
+                            Cancel
+                        </Button>
+                        <Button
+                            variant="destructive"
+                            onClick={async () => {
+                                if (!selectedSlotId) return;
+                                await handleSlotDelete(selectedSlotId);
+                                setIsDeleteModalOpen(false);
+                                setSelectedSlotId(null);
+                            }}
+                            disabled = {deleteLoading}
+                        >
+                            {deleteLoading ? "Deleting..." : "Confirm"}
+                        </Button>
+                    </div>
+
+                </BaseDialogModal>
 
             </div>
         </div>

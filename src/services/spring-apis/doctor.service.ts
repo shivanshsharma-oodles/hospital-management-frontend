@@ -20,6 +20,11 @@ export const addSlots = async (payload: AddSlotRequestPayload) => {
     await privateApi.post('/doctors/slots', payload)
 }
 
+// Delete Slot
+export const deleteSlot = async (id: number) => {
+    await privateApi.delete(`/doctors/slots/${id}`)
+}
+
 // Get Slots
 export const fetchMySlots = async (): Promise<SlotResponseType[]> => {
     const response = await privateApi.get('/doctors/slots');

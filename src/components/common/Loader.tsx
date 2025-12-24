@@ -22,13 +22,14 @@ const Loader = ({
     modern: (
       <div className={`relative ${sizeMap[size]}`}>
         <div className="h-full w-full rounded-full border-4 dark:border-pink-900 border-pink-200"></div>
-        <div className="absolute top-0 left-0 h-full w-full rounded-full border-4 border-transparent border-t-gray-600 border-r-gray-700 dark:border-t-gray-400 dark:border-r-gray-200 animate-spin"></div>
+        <div className="absolute top-0 left-0 h-full w-full rounded-full border-4 border-transparent border-t-pink-600 border-r-pink-700 dark:border-t-pink-400 dark:border-r-pink-200 animate-spin"></div>
       </div>
     ),
 
     encircle: (
-      <div className="relative flex items-center justify-center p-1"> {/* Spinning ring around object */}
-        <div className="absolute inset-0 rounded-full border-2 border-transparent border-t-teal-600 border-r-teal-700 dark:border-r-teal-300 animate-spin duration-1000"></div> {/* Static object in center */} <div className="relative z-10 flex items-center justify-center w-5 h-5"> {object} </div>
+      <div className="relative flex items-center justify-center p-2"> {/* Spinning ring around object */}
+        <div className="absolute inset-0 rounded-full border-3 border-transparent border-t-pink-400 border-r-pink-600 dark:border-r-pink-300 animate-spin duration-1000"></div> {/* Static object in center */} 
+        <div className="relative z-10 flex items-center justify-center w-7 h-7"> {object} </div>
       </div>),
 
     dots: (
@@ -54,7 +55,7 @@ const Loader = ({
 
   // FullScreen version
   const containerClass = "fixed inset-0 z-[9999] flex items-center justify-center";
-  const backdropClass = "absolute inset-0 bg-black/50 backdrop-blur-sm";
+  const backdropClass = "absolute inset-0 bg-black/10 backdrop-blur-xs";
 
   return (
     <div className={containerClass}>
@@ -71,7 +72,7 @@ const Loader = ({
         {/* Text with typing animation */}
         {text && (
           <div className="text-center">
-            <p className="font-fira text-lg text-gray-500 font-medium animate-pulse">
+            <p className="font-fira text-lg text-gray-800 font-medium animate-pulse">
               {text}
             </p>
           </div>
