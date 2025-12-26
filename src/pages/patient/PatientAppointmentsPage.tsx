@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { type AppointmentStatus } from "@/types";
 import { Appointmet_Tabs } from "@/utils/constants";
 import { useGetAppointments } from "@/hooks/useGetAppointments";

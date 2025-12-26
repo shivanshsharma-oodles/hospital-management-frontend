@@ -9,7 +9,7 @@ const LandingPage = () => {
   return (
     <>
       <CommonNavbar />
-      <main id="main">
+      <main id="main" className="h-screen overflow-auto">
         <AuthPage />
         <About />
       </main>

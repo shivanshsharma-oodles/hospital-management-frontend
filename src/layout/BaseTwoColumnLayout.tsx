@@ -25,7 +25,7 @@ export default function BaseTwoColumnLayout({
   return (
       <ResizablePanelGroup
         orientation="horizontal"
-        className="h-full flex-1 w-full"
+        className={`h-full flex-1 w-full ${className}`}
       >
         {/* LEFT PANEL (Sidebar) */}
         <ResizablePanel defaultSize={20} minSize={!resize ? 200 : minSize} maxSize={!resize ? 200 : maxSize }>

@@ -8,7 +8,6 @@ import AdminSidebar from '@/components/pagesComp/admin/AdminSidebar'
 import { fetchDepartments, getAllDoctors } from '@/services/spring-apis/public.service'
 import { type AdminSection, type BaseDoctorResponse, type DepartmentResponse } from '@/types'
 import { deleteDepartment } from '@/services/spring-apis/admin.service'
-import CommonNavbar from '@/components/common/CommonNavbar'
 
 const AdminDashboard = () => {
 

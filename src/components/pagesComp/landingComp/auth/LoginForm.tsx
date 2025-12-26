@@ -28,7 +28,7 @@ const LoginForm = () => {
         };
 
         try {
-            const res = await login(payload);
+            await login(payload);
             showSuccess("Login successful!", "login-success");
             // Navigate to dashboard (Doctor/Patient]) after login
             

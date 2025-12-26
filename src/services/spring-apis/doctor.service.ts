@@ -50,6 +50,6 @@ export const generateBill = async(
     appointmentId: number,
     amount: number,
 ) : Promise<BillResponse>=> {
-    const response = await privateApi.post(`/bills/${appointmentId}`);
+    const response = await privateApi.post(`/bills/${appointmentId}`, amount);
     return response.data;
 }
