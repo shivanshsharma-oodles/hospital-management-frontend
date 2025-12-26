@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 
 .env
+*.d.ts
+dist/
+build/

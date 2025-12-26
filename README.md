@@ -1,73 +1,102 @@
-# React + TypeScript + Vite
+# Hospital Management - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + Vite frontend for a hospital management system. Provides UI for public visitors, patients, doctors, and admins; integrates with backend Spring APIs for auth, departments, doctors, appointments, and more.
 
-Currently, two official plugins are available:
+**Tech Stack:**
+- **Framework:** React + TypeScript
+- **Bundler:** Vite
+- **Styling:** Tailwind CSS & Shadcn UI
+- **HTTP client:** Axios
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Quick Start**
 
-## React Compiler
+- Install dependencies:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+	`npm install`
 
-## Expanding the ESLint configuration
+- Run dev server:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+	`npm run dev`
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Build:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+	`npm run build`
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Preview production build:
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+	`npm run preview`
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+**Environment**
+- Create a `.env` (or provide env vars to your environment). The app reads the API base URL from `VITE_API_URL` and exposes it as `env.API_URL`.
+
+Example .env:
+
+VITE_API_URL=https://api.example.com
+
+
+**Project Structure (important parts)**
+- `src/` - application source
+	- `src/services/spring-apis/` - API wrappers used by the app
+	- `src/config/axios.config.ts` - Axios instances (`publicApi`, `privateApi`) configured to use `env.API_URL` and auth token
+	- `src/pages/` - route pages for public, patient, doctor, admin
+	- `src/components/` - shared UI components
+
+
+**Scripts**
+- `npm run dev` - start Vite dev server
+- `npm run build` - build production assets (runs `tsc -b && vite build`)
+- `npm run preview` - preview the production build
+- `npm run lint` - run ESLint
+
+
+**APIs Used (summary)**
+All API calls are made via the wrappers in `src/services/spring-apis/`. The app expects a RESTful backend (Spring) mounted under the base URL given by `VITE_API_URL`.
+
+- `auth.service.ts` (publicApi/privateApi)
+	- POST `/auth/signup` - sign up a new user
+	- POST `/auth/login` - login (stores JWT in client storage)
+	- POST `/auth/admin/login` - admin login
+	- GET `/auth/me` - get current authenticated user
+
+- `public.service.ts` (publicApi)
+	- GET `/departments` - list all departments
+	- POST `/departments/{id}` - (used in code as DepartmentById)
+	- GET `/doctors` - list all doctors
+	- GET `/doctors/{id}` - get doctor by id
+	- GET `/doctors/department/{id}` - list doctors by department id
+
+- `admin.service.ts` (privateApi - admin endpoints)
+	- POST `/departments` - add department
+	- DELETE `/departments/{id}` - delete department
+	- GET `/doctors/admin/{id}` - get complete doctor profile (admin)
+	- POST `/doctors/admin/create` - create doctor
+	- DELETE `/doctors/admin/{id}` - delete doctor
+
+- `common.service.ts` (privateApi)
+	- GET `/appointments/me` - appointments for current user
+	- PUT `/appointments/{id}/cancel` - cancel appointment
+	- GET `/doctors/{doctorId}/slots` - get slots for a doctor
+
+- `doctor.service.ts` (privateApi - doctor endpoints)
+	- GET `/doctors/me` - fetch current doctor profile
+	- PUT `/doctors` - update doctor
+	- POST `/doctors/slots` - add slots
+	- DELETE `/doctors/slots/{id}` - delete a slot
+	- GET `/doctors/slots` - fetch my slots
+	- PUT `/appointments/{id}/status` - manage pending appointment (SCHEDULED | REJECTED)
+	- PUT `/appointments/{id}/complete` - complete appointment (medical record payload)
+
+- `patient.service.ts` (privateApi - patient endpoints)
+	- GET `/patients/me` - fetch current patient profile
+	- PUT `/patients` - update patient
+	- POST `/appointments` - book appointment (payload: `{ doctorSlotId }`)
+
+
+Notes:
+- Auth tokens are stored via the project's `storage` helper when logging in. `privateApi` should attach the token to requests (see `src/config/axios.config.ts`).
+- The above routes were inferred from the service wrapper functions; consult your backend API docs for request/response shapes and validation rules.
+
+
+If you want, I can:
+- Create separate the API docs with example request/response shapes for each endpoint.
