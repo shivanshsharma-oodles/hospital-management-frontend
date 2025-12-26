@@ -19,7 +19,7 @@ export interface LoginResponse {
 }
 
 export type Role = "ADMIN" | "DOCTOR" | "PATIENT"
-export interface AuthUserResponse{
+export interface AuthUserResponse {
     id: number,
     email: string,
     roles: Role[]
@@ -63,7 +63,7 @@ export interface CompleteDoctorResponse extends BaseDoctorResponse {
     createdAt: Date
 }
 
-export interface DoctorRequestPayload{
+export interface DoctorRequestPayload {
     name: string
     email: string
     phone: string
@@ -74,12 +74,12 @@ export interface DoctorRequestPayload{
     departmentId: number
 }
 
-export interface AddSlotRequestPayload{
+export interface AddSlotRequestPayload {
     date: string
     startTime: string
     endTime: string
 }
-export interface SlotResponseType{
+export interface SlotResponseType {
     id: number
     date: string
     startTime: string
@@ -87,10 +87,13 @@ export interface SlotResponseType{
     isBooked?: boolean
 }
 
+export interface AppointmentSummaryResponse {
+    id: number
+}
 
 export type AppointmentStatus = "PENDING" | "SCHEDULED" | "COMPLETED" | "REJECTED" | "CANCELLED"
 // Appointments
-export interface AppointmentResponse{
+export interface AppointmentResponse {
     id: number,
     appointmentStatus: AppointmentStatus
     doctor: BaseDoctorResponse
@@ -140,4 +143,41 @@ export interface ProfileContext {
     gender: Gender
     address: Address
     createdAt: string
+}
+
+export interface MedicalRecordRequest {
+    symptoms: string;
+    diagnosis: string;
+    prescription: string;
+    pulse?: number;
+    treatment?: string;
+    bpSystolic?: number;
+    bpDiastolic?: number;
+    temperature?: number;
+    followUpDate?: string;
+}
+
+export interface MedicalRecordResponse {
+    id: number;
+    doctor: BaseDoctorResponse;
+    patient: PatientSummaryResponse;
+    appointment: AppointmentSummaryResponse;
+    symptoms: string;
+    diagnosis: string;
+    prescription: string;
+    treatment?: string;
+    followUpDate?: string;
+    temperature?: number;
+    pulse?: number;
+    bpSystolic?: number;
+    bpDiastolic?: number;
+}
+
+export interface BillResponse {
+    id: number;
+    patient: PatientSummaryResponse;
+    doctor: BaseDoctorResponse;
+    appointment: AppointmentSummaryResponse;
+    amount: number;
+    createdAt: string;
 }

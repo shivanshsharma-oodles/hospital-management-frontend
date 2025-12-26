@@ -16,7 +16,7 @@ interface BaseDialogModalProps {
 
   children: React.ReactNode;
   footer?: React.ReactNode; 
-
+  className?: string;
   showCross?: boolean;
 }
 
@@ -28,10 +28,11 @@ const BaseDialogModal = ({
   children,
   footer,
   showCross = true,
+  className = ""
 }: BaseDialogModalProps) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent showCloseButton={showCross} className="sm:max-w-md bg-light">
+      <DialogContent showCloseButton={showCross} className={`sm:max-w-md bg-light ${className}`}>
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
           {description && (

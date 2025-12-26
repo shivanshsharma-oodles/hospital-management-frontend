@@ -11,6 +11,7 @@ const PatientAppointmentsPage = () => {
     const { appointments, setAppointments, loadingAppointments, error } = useGetAppointments();
     const { handleAction } = useAppointmentActions(setAppointments, "PATIENT")
 
+
     // 2. State: Default is 'SCHEDULED'
     const [currentView, setCurrentView] = useState<AppointmentStatus>("SCHEDULED");
 
@@ -20,7 +21,7 @@ const PatientAppointmentsPage = () => {
     );
 
     // 4. Loading/Error Handling (User Experience ke liye important)
-    if (loadingAppointments) return <Loader variant="encircle" size="lg" text="Loading Departments..." fullScreen={true} />;
+    if (loadingAppointments) return <Loader variant="encircle" text="Loading Departments..." fullScreen={true} />;
     if (error) return <div className="p-6 text-red-500">Failed to load data.</div>;
 
     return (

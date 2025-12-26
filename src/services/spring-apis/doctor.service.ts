@@ -1,5 +1,5 @@
 import { privateApi } from "@/config/axios.config";
-import type { AddSlotRequestPayload, AppointmentResponse, CompleteDoctorResponse, DoctorRequestPayload, SlotResponseType } from "@/types";
+import type { AddSlotRequestPayload, AppointmentResponse, BillResponse, CompleteDoctorResponse, DoctorRequestPayload, MedicalRecordRequest, SlotResponseType } from "@/types";
 
 /* Doctor Controller APIs */
 
@@ -38,5 +38,18 @@ export const managePendingAppointment = async (
     return response.data;
 }
 
+export const completeAppointment = async(
+    id: number, 
+    payload: MedicalRecordRequest
+): Promise<AppointmentResponse> => {
+    const response = await privateApi.put(`/appointments/${id}/complete`, payload)
+    return response.data;
+}
 
-
+export const generateBill = async(
+    appointmentId: number,
+    amount: number,
+) : Promise<BillResponse>=> {
+    const response = await privateApi.post(`/bills/${appointmentId}`);
+    return response.data;
+}

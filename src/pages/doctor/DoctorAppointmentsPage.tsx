@@ -1,11 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { type AppointmentStatus } from "@/types";
 import { Appointmet_Tabs } from "@/utils/constants";
 import { useGetAppointments } from "@/hooks/useGetAppointments";
 import { useAppointmentActions } from "@/hooks/useAppointmentActions";
 import CommonAppointmentTable from "@/components/common/CommonAppointmentTable";
+import Loader from "@/components/common/Loader";
+import { useLocation } from "react-router-dom";
+import ConfirmationPopup from "@/components/common/ConfirmationPopup";
 
 const DoctorAppointmentsPage = () => {
+
+    const location = useLocation();
+    const [showRecordSavedPopup, setShowRecordSavedPopup] = useState(false);
+
+    useEffect(() => {
+        if (location.state?.appointmentCompleted) {
+            setShowRecordSavedPopup(true);
+        }
+    }, [location.state]);
+
     // 1. Data Fetching
     const { appointments, setAppointments, loadingAppointments, error } = useGetAppointments();
     const { handleAction } = useAppointmentActions(setAppointments, "DOCTOR")
@@ -19,7 +32,7 @@ const DoctorAppointmentsPage = () => {
     );
 
     // 4. Loading/Error Handling (User Experience ke liye important)
-    if (loadingAppointments) return <div className="p-6">Loading appointments...</div>;
+    if (loadingAppointments) return <Loader variant="encircle" text="Loading Departments..." fullScreen={true} />;
     if (error) return <div className="p-6 text-red-500">Failed to load data.</div>;
 
     return (
@@ -57,6 +70,17 @@ const DoctorAppointmentsPage = () => {
                     onAction={handleAction}
                 />
             </div>
+
+            {showRecordSavedPopup && (
+                <ConfirmationPopup
+                    isModalOpen={showRecordSavedPopup}
+                    setIsModalOpen={setShowRecordSavedPopup}
+                    title="Medical Record Added"
+                    description="The patient's record has been saved and the appointment is now completed."
+                    buttonText="Close"
+                    showButton={true}
+                />
+            )}
         </div>
     );
 };

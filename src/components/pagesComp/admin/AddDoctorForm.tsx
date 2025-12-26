@@ -84,6 +84,7 @@ const AddDoctorForm = ({
 
   return (
     <BasePageForm
+      className="py-5 my-3"
       title={ADD_DOCTOR_FORM.TITLE}
       description={ADD_DOCTOR_FORM.DESCRIPTION}
       showGoBack={showGoBack}

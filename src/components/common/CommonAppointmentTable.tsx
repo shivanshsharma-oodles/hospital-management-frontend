@@ -95,7 +95,7 @@ const CommonAppointmentTable = ({
                   )}
                   {statusView === "SCHEDULED" && role === "PATIENT" && (
                     <Button size="sm" variant="outline" className="border-red-600 hover:bg-red-500 hover:text-white" onClick={() => onAction(app.id, "CANCEL")}>
-                      <X/>Cancel Appoinment
+                      Cancel
                     </Button>
                   )}
 

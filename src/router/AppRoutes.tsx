@@ -30,6 +30,7 @@ import PatientDoctorsPage from '@/pages/patient/PatientDoctorsPage';
 import PatientAppointmentsPage from '@/pages/patient/PatientAppointmentsPage';
 import PatientMedicalRecordPage from '@/pages/patient/PatientMedicalRecordPage';
 import AdminLayout from '@/layout/AdminLayout';
+import CompleteAppointmentPage from '@/pages/doctor/CompleteAppointmentPage';
 
 const AppRoutes = () => {
     return (
@@ -53,6 +54,7 @@ const AppRoutes = () => {
                         <Route path="/doctor" element={<DoctorLayout />}>
                             <Route path="dashboard" element={<DoctorDashboard />} />
                             <Route path="appointments" element={<DoctorAppointmentsPage />} />
+                            <Route path="appointments/:id/complete" element={<CompleteAppointmentPage />} />
                             <Route path="slots" element={<DoctorSlotsPage />} />
                         </Route>
 

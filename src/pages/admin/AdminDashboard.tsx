@@ -57,7 +57,6 @@ const AdminDashboard = () => {
 
   return (
     <div className="flex flex-col h-screen overflow-hidden">
-      <CommonNavbar role = "ADMIN" />
 
       <div className="flex-1 min-h-0">
         <BaseTwoColumnLayout

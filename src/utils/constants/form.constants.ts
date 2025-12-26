@@ -199,3 +199,93 @@ export const COMMON_BUTTONS = {
   GO_BACK: "Go Back",
   SUBMITTING: "Submitting...",
 } as const;
+
+// 
+export const MEDICAL_RECORD_FORM = {
+  TITLE: "Add Treatment Details",
+  DESCRIPTION: "Fill patient diagnosis & treatment details to complete the appointment.",
+
+  BUTTONS: {
+    SUBMIT: "Complete Appointment",
+    GO_BACK: "Go Back",
+    SUBMITTING: "Completing...",
+    CANCEL: "Cancel",
+  },
+
+  FIELDS: {
+    SYMPTOMS: {
+      id: "symptoms",
+      label: "Symptoms",
+      placeholder: "Describe patient symptoms...",
+      requiredMessage: "Symptoms are required",
+      required: true,
+      type: "textarea",
+    },
+
+    DIAGNOSIS: {
+      id: "diagnosis",
+      label: "Diagnosis",
+      placeholder: "Primary diagnosis...",
+      requiredMessage: "Diagnosis is required",
+      required: true,
+      type: "textarea",
+    },
+
+    PRESCRIPTION: {
+      id: "prescription",
+      label: "Prescription",
+      placeholder: "Prescribed medicines...",
+      requiredMessage: "Prescription is required",
+      required: true,
+      type: "textarea",
+    },
+
+    TREATMENT: {
+      id: "treatment",
+      label: "Treatment",
+      placeholder: "Treatment / procedure (optional)",
+      type: "textarea",
+      required: false,
+    },
+
+    FOLLOW_UP_DATE: {
+      id: "followUpDate",
+      label: "Follow-up Date",
+      placeholder: "Select follow-up date",
+      type: "date",
+      required: false,
+    },
+
+    TEMPERATURE: {
+      id: "temperature",
+      label: "Temperature (°C)",
+      placeholder: "Ex: 98.4",
+      type: "number",
+      required: false,
+    },
+
+    PULSE: {
+      id: "pulse",
+      label: "Pulse (bpm)",
+      placeholder: "Ex: 82",
+      type: "number",
+      required: false,
+    },
+
+    BP_SYSTOLIC: {
+      id: "bpSystolic",
+      label: "Blood Pressure - Systolic",
+      placeholder: "Ex: 120",
+      type: "number",
+      required: false,
+    },
+
+    BP_DIASTOLIC: {
+      id: "bpDiastolic",
+      label: "Blood Pressure - Diastolic",
+      placeholder: "Ex: 80",
+      type: "number",
+      required: false,
+    },
+  },
+} as const;

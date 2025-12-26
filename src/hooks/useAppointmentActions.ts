@@ -64,8 +64,7 @@ export const useAppointmentActions = (
                         break;
 
                     case "COMPLETE":
-                        // await completeAppointment(id);
-                        showSuccess("Marked Completed");
+                        navigate(`/doctor/appointments/${id}/complete`)
                         // UI update logic...
                         break;
                 }

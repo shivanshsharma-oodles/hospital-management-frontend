@@ -12,10 +12,10 @@ function App() {
           // Default styles
           style: {
             fontFamily: 'monospace',
-            fontSize: '12px',
-            width: '60%',
+            fontSize: '14px',
+            width: '70%',
             overflow: 'hidden',
-            padding: '5px 10px',
+            padding: '8px 10px',
             border: '1px solid #a8a8a8',
             animation: 'toast-custom-animation 800ms ease', // 1s for slow animation
           },
