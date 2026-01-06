@@ -1,11 +1,13 @@
+import ConfirmationPopup from "@/components/common/ConfirmationPopup";
 import DoctorCard from "@/components/common/DoctorCard";
+import { TickIcon } from "@/components/common/Icons";
 import Loader from "@/components/common/Loader";
 import PatientSlotModal from "@/components/pagesComp/patient/PatientSlotModal";
 import { getAllDoctorsByDeptId } from "@/services/spring-apis/public.service";
 import type { BaseDoctorResponse } from "@/types";
 import { showError } from "@/utils/toast";
 import React, { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const PatientDoctorsPage = () => {
     const [doctors, setDoctors] = useState<BaseDoctorResponse[]>([]);
@@ -13,11 +15,14 @@ const PatientDoctorsPage = () => {
     const [searchParams] = useSearchParams();
 
     const [showSlotModal, setShowSlotModal] = useState(false);
+    const [showConfirmationPopup, setShowConfirmationPopup] = useState(false);
     const [selectedDoctor, setSelectedDoctor] =
         useState<BaseDoctorResponse | null>(null);
 
     const departmentId = searchParams.get("department");
     const departmentName = searchParams.get("departmentName");
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchDoctors = async () => {
@@ -55,22 +60,23 @@ const PatientDoctorsPage = () => {
 
             {/* Doctors Grid */}
             {doctors.length === 0
-            ? <div className="text-gray-500 justify-center flex itmes-center">
-                <p> No Doctors Available Right Now</p>
-            </div>
-            : <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {doctors.map((doc) => (
-                    <DoctorCard
-                        key={doc.id}
-                        doctor={doc}
-                        button1Text="Book Slot"
-                        onButton1={() => {
-                            setSelectedDoctor(doc);
-                            setShowSlotModal(true);
-                        }}
-                    />
-                ))}
-            </div>
+                ? <div className="text-gray-500 justify-center flex itmes-center">
+                    <p> No Doctors Available Right Now</p>
+                </div>
+                : <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {doctors.map((doc) => (
+                        <DoctorCard
+                            key={doc.id}
+                            doctor={doc}
+                            button1Text="Book Slot"
+                            onButton1={() => {
+                                setShowConfirmationPopup(false);
+                                setSelectedDoctor(doc);
+                                setShowSlotModal(true);
+                            }}
+                        />
+                    ))}
+                </div>
             }
 
             {/* Slot Modal */}
@@ -81,10 +87,37 @@ const PatientDoctorsPage = () => {
                         setShowSlotModal(false);
                         setSelectedDoctor(null);
                     }}
+                    setShowConfirmation={setShowConfirmationPopup}
                     doctorId={selectedDoctor.id}
                     doctorName={selectedDoctor.name}
                 />
             )}
+
+            {
+                showConfirmationPopup &&
+                <ConfirmationPopup
+                    isModalOpen={showConfirmationPopup}
+                    setIsModalOpen={setShowConfirmationPopup}
+                    title="Appointment Requested"
+                    description="Please wait, while the doctor accept the appointment."
+                    icon={<TickIcon />}
+                    actions={[
+                        {
+                            label: "Close",
+                            variant: "outline",
+                            onClick: () => setShowConfirmationPopup(false),
+                        },
+                        {
+                            label: "Appointments ➤",
+                            variant: "confirm",
+                            onClick: () => {
+                                setShowConfirmationPopup(false)
+                                navigate("/patient/appointments")
+                            },
+                        },
+                    ]}
+                />
+            }
         </div>
     );
 };

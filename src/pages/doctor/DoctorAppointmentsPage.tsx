@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import Loader from "@/components/common/Loader";
 import { type AppointmentStatus } from "@/types";
+import React, { useEffect, useState } from "react";
 import { Appointmet_Tabs } from "@/utils/constants";
+import { TickIcon } from "@/components/common/Icons";
 import { useGetAppointments } from "@/hooks/useGetAppointments";
 import { useAppointmentActions } from "@/hooks/useAppointmentActions";
-import CommonAppointmentTable from "@/components/common/CommonAppointmentTable";
-import Loader from "@/components/common/Loader";
-import { useLocation } from "react-router-dom";
 import ConfirmationPopup from "@/components/common/ConfirmationPopup";
+import CommonAppointmentTable from "@/components/common/CommonAppointmentTable";
 
 const DoctorAppointmentsPage = () => {
 
@@ -26,7 +27,7 @@ const DoctorAppointmentsPage = () => {
     // 2. State: Default is 'SCHEDULED'
     const [currentView, setCurrentView] = useState<AppointmentStatus>("SCHEDULED");
 
-    // 3. Safe Filter Logic (Null check zaroori hai taaki crash na ho)
+    // 3. Safe Filter Logic (Null check to avoid crash)
     const filteredData = (appointments || []).filter(
         (app) => app.appointmentStatus === currentView
     );
@@ -76,9 +77,9 @@ const DoctorAppointmentsPage = () => {
                     isModalOpen={showRecordSavedPopup}
                     setIsModalOpen={setShowRecordSavedPopup}
                     title="Medical Record Added"
-                    description="The patient's record has been saved and the appointment is now completed."
-                    buttonText="Close"
-                    showButton={true}
+                    description="The patient's record has been saved."
+                    duration={3000}
+                    icon={<TickIcon />}
                 />
             )}
         </div>

@@ -5,13 +5,8 @@ import React from 'react';
 import LandingPage from '@/pages/public/LandingPage';
 import AdminLandingPage from '@/pages/admin/AdminLandingPage';
 
-// Layouts
-// import ProtectedLayout from '@/layout/ProtectedLayout';
 import AppLayout from '@/layout/AppLayout';
 
-// Protected Routes
-
-// Invalid Route
 import NotFound from "@/pages/NotFound";
 import AdminDashboard from '@/pages/admin/AdminDashboard';
 import AddDoctorPage from '@/pages/admin/AddDoctorPage';

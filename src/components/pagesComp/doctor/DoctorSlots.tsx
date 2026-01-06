@@ -1,14 +1,15 @@
 import React from "react";
-// import { format } from "date-fns"; // Optional: For better date formatting
+import { format } from "date-fns";
 import { Trash2, Calendar, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import type { SlotResponseType } from "@/types";
+import { formatTime } from "@/utils/formatTime";
 
 interface SlotsRenderProps {
     slots: SlotResponseType[];
     loading: boolean;
-    onDelete: (id: number) => void; // Future proofing for delete action
+    onDelete: (id: number) => void;
 }
 
 const DoctorSlots = ({ slots, loading, onDelete }: SlotsRenderProps) => {
@@ -23,6 +24,7 @@ const DoctorSlots = ({ slots, loading, onDelete }: SlotsRenderProps) => {
             </div>
         );
     }
+    
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -34,7 +36,7 @@ const DoctorSlots = ({ slots, loading, onDelete }: SlotsRenderProps) => {
                     <div className="flex justify-between items-start">
                         <div className="flex items-center gap-2 text-primary font-medium">
                             <Calendar className="w-4 h-4" />
-                            {slot.date}
+                            {format(slot.date, 'dd MMMM yyyy')}
                         </div>
                         {slot.isBooked ? (
                             <Badge variant="secondary" className="bg-yellow-100 text-yellow-800 hover:bg-yellow-100">Booked</Badge>
@@ -43,9 +45,10 @@ const DoctorSlots = ({ slots, loading, onDelete }: SlotsRenderProps) => {
                         )}
                     </div>
 
-                    <div className="flex items-center gap-2 text-xl font-bold">
+                    <div className="flex items-center gap-2 text-xl font-semibold">
                         <Clock className="w-5 h-5 text-muted-foreground" />
-                        <span>{slot.startTime} - {slot.endTime}</span>
+                        {/* <span>{format(slot.startTime, 'hh:mm:ss a')} - {slot.endTime}</span> */}
+                        <span>{ formatTime(slot.startTime)} - { formatTime(slot.endTime)}</span>
                     </div>
 
                     {!slot.isBooked && (

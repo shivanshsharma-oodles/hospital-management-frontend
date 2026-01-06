@@ -1,8 +1,10 @@
+import ConfirmationPopup from '@/components/common/ConfirmationPopup';
 import DepartmentCard from '@/components/common/DepartmentCard';
 import Loader from '@/components/common/Loader';
 import { fetchDepartments } from '@/services/spring-apis/public.service';
 import type { DepartmentResponse } from '@/types'
 import { showError } from '@/utils/toast';
+import { Check, CheckCheckIcon } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
@@ -52,6 +54,7 @@ const PatientDepartmentsPage = () => {
           </p>
         )
         : <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
           {departments.map((dept) => (
             <DepartmentCard
               key={dept.id}

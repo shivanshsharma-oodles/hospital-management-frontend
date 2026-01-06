@@ -7,7 +7,7 @@ function App() {
     <div className="relative h-screen overflow-hidden">
       <AppRoutes />
       <Toaster
-        position='bottom-right'
+        position='top-right'
         toastOptions={{
           // Default styles
           style: {

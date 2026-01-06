@@ -10,6 +10,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Check, X, Eye, CheckCircle, } from "lucide-react";
 import type { AppointmentResponse, AppointmentStatus } from "@/types";
+import { formatTime } from "@/utils/formatTime";
+import { format } from "date-fns";
 
 // Role type define kar diya clarity ke liye
 type UserRole = "DOCTOR" | "PATIENT";
@@ -63,10 +65,10 @@ const CommonAppointmentTable = ({
               <TableCell>
                 <div className="flex flex-col">
                   {/* FIXED: Accessed inside 'slot' object */}
-                  <span>{app.slot.date}</span>
+                  <span>{format(app.slot.date, 'dd MMM yyyy')}</span>
                   <div className="flex items-center">
-                    <span className="text-xs text-muted-foreground">{`${app.slot.startTime} - `}</span>
-                    <span className="text-xs text-muted-foreground">{`${app.slot.endTime}`}</span>
+                    <span className="text-xs text-muted-foreground">{`${formatTime(app.slot.startTime)} - `}</span>
+                    <span className="text-xs text-muted-foreground">{`${formatTime(app.slot.endTime)}`}</span>
                   </div>
                 </div>
               </TableCell>

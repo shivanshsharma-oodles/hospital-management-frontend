@@ -64,7 +64,6 @@ const DoctorSlotsPage = () => {
                 <DoctorSlots
                     slots={slots}
                     loading={loading}
-                    // if need delete feature just pass the function
                     onDelete={(id) => {
                         setSelectedSlotId(id);
                         setIsDeleteModalOpen(true);

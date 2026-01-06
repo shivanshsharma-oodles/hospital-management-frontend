@@ -2,63 +2,91 @@ import React, { useEffect } from 'react'
 import BaseDialogModal from './baseComp/BaseDialogModal';
 import { Button } from '../ui/button';
 
+interface ConfirmationAction {
+    label?: string;
+    onClick?: () => void;
+    variant?: "default" | "outline" | "destructive" | "confirm";
+}
+
 interface ConfirmationPopupProps {
     isModalOpen: boolean,
+    setIsModalOpen: (open: boolean) => void,
+
     title: string,
     description: string,
-    buttonText?: string,
-    showButton?: boolean
-    duration?: number
-    setIsModalOpen: (open: boolean) => void,
+
+    icon?: React.ReactNode
+    actions?: ConfirmationAction[];
+    duration?: number;
+
     children?: React.ReactNode
 }
+
 
 const ConfirmationPopup = ({
     isModalOpen,
     setIsModalOpen,
     title,
     description,
-    buttonText,
+    icon,
+    actions = [
+        {
+            label: "Close",
+            onClick: () => setIsModalOpen(false),
+        },
+    ],
     duration,
-    showButton = false,
-    children
+    // children,
 }: ConfirmationPopupProps) => {
 
 
-    if (duration !== null) {
-        useEffect(() => {
-            setTimeout(() => {
-                setIsModalOpen(false);
-            }, duration)
-        }, [])
-    }
+    useEffect(() => {
+        if (!duration) return;
+
+        const timer = setTimeout(() => {
+            setIsModalOpen(false);
+        }, duration);
+
+        return () => clearTimeout(timer);
+    }, [duration, setIsModalOpen]);
+
 
     return (
-        <div>
-            <BaseDialogModal
-                open={isModalOpen}
-                onOpenChange={setIsModalOpen}
-                title={title}
-                description={description}
-                className='bg-white'
-            >
-                <div className='my-1 flex justify-center'>
-                    {children}
+        <BaseDialogModal
+            open={isModalOpen}
+            onOpenChange={setIsModalOpen}
+        >
+            {/* ICON */}
+            {icon && (
+                <div className="flex justify-center mb-5">
+                    {icon}
                 </div>
-                {showButton &&
-                    <div className="flex gap-2 flex-row justify-end">
-                        <Button
-                            variant="default"
-                            className=''
-                            onClick={() => { }}
-                        >
-                            {buttonText}
-                        </Button>
-                    </div>
-                }
-            </BaseDialogModal>
-        </div>
-    )
-}
+            )}
+
+            {/* TITLE */}
+            <h2 className="text-xl font-semibold text-center">
+                {title}
+            </h2>
+
+            {/* DESCRIPTION */}
+            <p className="text-sm text-muted-foreground text-center mt-1">
+                {description}
+            </p>
+
+            {/* ACTIONS */}
+            <div className="flex justify-center gap-4 mt-6">
+                {actions.map((action, idx) => (
+                    <Button
+                        key={idx}
+                        variant={action.variant || "default"}
+                        onClick={action.onClick}
+                    >
+                        {action.label}
+                    </Button>
+                ))}
+            </div>
+        </BaseDialogModal>
+    );
+};
 
 export default ConfirmationPopup

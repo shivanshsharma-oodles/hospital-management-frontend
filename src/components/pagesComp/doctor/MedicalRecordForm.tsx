@@ -46,7 +46,7 @@ const MedicalRecordForm = ({
       setLoading(true);
       await completeAppointment(appointmentId, payload);
       showSuccess("Appointment completed & medical record saved.");
-      onSubmitSuccess?.();
+      onSubmitSuccess?.(); 
       navigate(goBackRoute, {
         state: { appointmentCompleted: true }
       });

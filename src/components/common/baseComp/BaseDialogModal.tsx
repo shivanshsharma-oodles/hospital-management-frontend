@@ -11,7 +11,7 @@ interface BaseDialogModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
 
-  title: string;
+  title?: string;
   description?: string;
 
   children: React.ReactNode;
