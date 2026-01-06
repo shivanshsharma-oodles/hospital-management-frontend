@@ -7,6 +7,7 @@ import { showError } from "@/utils/toast";
 import type { SlotResponseType } from "@/types";
 import { deleteSlot, fetchMySlots } from "@/services/spring-apis/doctor.service";
 import BaseDialogModal from "@/components/common/baseComp/BaseDialogModal";
+import { sortSlotByDateTime } from "@/utils/sortSlotsByDateTime";
 
 const DoctorSlotsPage = () => {
     // 1. Local State for Data
@@ -22,7 +23,7 @@ const DoctorSlotsPage = () => {
         try {
             setLoading(true);
             const response = await fetchMySlots();
-            setSlots(response);
+            setSlots(sortSlotByDateTime(response));
         } catch (error) {
             console.error(error);
             showError(error?.response?.data?.error || "Failed to load slots", "load-slots-error");

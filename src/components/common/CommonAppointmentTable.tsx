@@ -12,6 +12,7 @@ import { Check, X, Eye, CheckCircle, } from "lucide-react";
 import type { AppointmentResponse, AppointmentStatus } from "@/types";
 import { formatTime } from "@/utils/formatTime";
 import { format } from "date-fns";
+import { sortAppointmentsByDateTime } from "@/utils/sortAppointmentsByDateTime";
 
 // Role type define kar diya clarity ke liye
 type UserRole = "DOCTOR" | "PATIENT";
@@ -33,6 +34,8 @@ const CommonAppointmentTable = ({
   if (!data || data.length === 0) {
     return <div className="p-8 text-center text-muted-foreground border rounded-md">No appointments found in this category.</div>;
   }
+
+  data = sortAppointmentsByDateTime(data);
 
   return (
     <div className="rounded-md border">

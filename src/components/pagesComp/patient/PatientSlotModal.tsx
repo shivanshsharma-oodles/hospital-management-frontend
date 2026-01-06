@@ -8,6 +8,7 @@ import { getSlotsByDoctorId } from "@/services/spring-apis/common.service";
 import { formatTime } from "@/utils/formatTime";
 import { format } from "date-fns";
 import type { SlotResponseType } from "@/types";
+import { sortSlotByDateTime } from "@/utils/sortSlotsByDateTime";
 
 interface SlotModalProps {
     open: boolean;
@@ -36,7 +37,7 @@ const PatientSlotModal = ({
             try {
                 setLoading(true);
                 const res = await getSlotsByDoctorId(doctorId);
-                setSlots(res);
+                setSlots(sortSlotByDateTime(res));
             } catch (err) {
                 showError(err?.response?.data?.err || "Failed to fetch slots");
             } finally {
@@ -100,10 +101,10 @@ const PatientSlotModal = ({
                                     key={slot.id}
                                     onClick={() => setSelectedSlotId(slot.id)}
                                     className={`w-full rounded-lg border p-3 text-left transition flex items-center justify-between
-                                                 ${isSelected
-                                                    ? "border-primary bg-primary/5 ring-1 ring-primary"
-                                                    : "hover:border-primary/40 hover:bg-muted"}
-        `}
+                                            ${isSelected
+                                            ? "border-primary bg-primary/5 ring-1 ring-primary"
+                                            : "hover:border-primary/40 hover:bg-muted"}
+                                            `}
                                 >
                                     {/* Left: Date */}
                                     <div className="text-sm text-primary">
