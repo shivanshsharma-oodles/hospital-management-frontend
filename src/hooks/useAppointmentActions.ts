@@ -12,14 +12,13 @@ export const useAppointmentActions = (
 ) => {
     const navigate = useNavigate();
 
-    const handleAction = async (id: number, actionType: string) => {
+    const handleAction = async (id: number,  actionType: string, recordId?: number) => {
         console.log(`[${role}] Action: ${actionType} on ID: ${id}`);
 
         try {
             // --- COMMON ACTIONS (Both Roles) ---
             if (actionType === "VIEW_DETAILS") {
-                // Role ke hisaab se URL change kar sakte hain agar zaroorat ho
-                navigate(`${role.toLowerCase}/appointment-details/${id}`);
+                navigate(`/${role.toLowerCase()}/appointment-details/${recordId}`);
                 return;
             }
 
@@ -65,7 +64,6 @@ export const useAppointmentActions = (
 
                     case "COMPLETE":
                         navigate(`/doctor/appointments/${id}/complete`)
-                        // UI update logic...
                         break;
                 }
             }

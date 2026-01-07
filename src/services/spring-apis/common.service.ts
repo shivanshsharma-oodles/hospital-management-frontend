@@ -1,5 +1,5 @@
 import { privateApi } from "@/config/axios.config";
-import type { AppointmentResponse, SlotResponseType } from "@/types";
+import type { AppointmentResponse, MedicalRecordResponse, SlotResponseType } from "@/types";
 
 
 export const getAppointments = async (
@@ -19,5 +19,12 @@ export const getSlotsByDoctorId = async (
     doctorId: number
 ): Promise<SlotResponseType[]> => {
     const response = await privateApi.get(`/doctors/${doctorId}/slots`);
+    return response.data;
+}
+
+export const getMedicalRecordById = async (
+    id: number
+) : Promise<MedicalRecordResponse> => {
+    const response = await privateApi.get(`/medical-records/get/${id}`);
     return response.data;
 }

@@ -21,7 +21,7 @@ interface CommonAppointmentTableProps {
   data: AppointmentResponse[];
   statusView: AppointmentStatus; // Should be PENDING, SCHEDULED etc.
   role: UserRole;
-  onAction: (id: number, actionType: string) => void;
+  onAction: (id: number, actionType: string, recordId?:number) => void;
 }
 
 const CommonAppointmentTable = ({
@@ -118,7 +118,7 @@ const CommonAppointmentTable = ({
 
                   {/* CASE 3: COMPLETED */}
                   {statusView === "COMPLETED" && (
-                    <Button size="sm" variant="secondary" onClick={() => onAction(app.id, "VIEW_DETAILS")}>
+                    <Button size="sm" variant="secondary" onClick={() => onAction(app.id, "VIEW_DETAILS", app.medicalRecordId)}>
                       <Eye className="w-4 h-4 mr-1" /> View Details
                     </Button>
                   )}

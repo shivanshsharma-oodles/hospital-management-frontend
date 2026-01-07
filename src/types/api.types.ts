@@ -99,6 +99,7 @@ export interface AppointmentResponse {
     doctor: BaseDoctorResponse
     patient: PatientSummaryResponse
     slot: SlotResponseType
+    medicalRecordId?: number
 }
 
 

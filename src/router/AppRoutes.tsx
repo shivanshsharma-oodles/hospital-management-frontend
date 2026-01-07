@@ -26,6 +26,7 @@ import PatientAppointmentsPage from '@/pages/patient/PatientAppointmentsPage';
 import PatientMedicalRecordPage from '@/pages/patient/PatientMedicalRecordPage';
 import AdminLayout from '@/layout/AdminLayout';
 import CompleteAppointmentPage from '@/pages/doctor/CompleteAppointmentPage';
+import MedicalRecordPage from '@/components/pagesComp/common/MedicalRecordPage';
 
 const AppRoutes = () => {
     return (
@@ -50,6 +51,7 @@ const AppRoutes = () => {
                             <Route path="dashboard" element={<DoctorDashboard />} />
                             <Route path="appointments" element={<DoctorAppointmentsPage />} />
                             <Route path="appointments/:id/complete" element={<CompleteAppointmentPage />} />
+                            <Route path="appointment-details/:id" element={<MedicalRecordPage />} />
                             <Route path="slots" element={<DoctorSlotsPage />} />
                         </Route>
 
@@ -67,6 +69,7 @@ const AppRoutes = () => {
                             <Route path='departments' element={<PatientDepartmentsPage />} />
                             <Route path='doctors' element={<PatientDoctorsPage />} />
                             <Route path='appointments' element={<PatientAppointmentsPage />} />
+                            <Route path='appointment-details/:id' element={<MedicalRecordPage />} />
                             <Route path='records' element={<PatientMedicalRecordPage />} />
                         </Route>
 
