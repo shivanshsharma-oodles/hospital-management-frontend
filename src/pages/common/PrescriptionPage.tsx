@@ -10,7 +10,7 @@ import { getMedicalRecordById } from "@/services/spring-apis/common.service";
 import type { MedicalRecordResponse } from "@/types";
 import Loader from "@/components/common/Loader";
 
-const MedicalRecordPage = () => {
+const PrescriptionPage = () => {
     const [record, setRecord] = useState<MedicalRecordResponse | null>(null);
     const [loading, setLoading] = useState(false);
     const { id } = useParams();
@@ -110,14 +110,14 @@ const MedicalRecordPage = () => {
                                 <span className="font-semibold">{format(new Date(record.followUpDate), "EEEE, dd MMM yyyy")}</span>
                             </p>
                         )}
-                        <p className="text-[10px] text-gray-400 mt-2 italic">Digitally generated on {format(new Date(), "PPP")}</p>
+                        <p className="text-[10px] text-gray-500 mt-2 italic">Digitally generated on {format(new Date(record.createdAt), "PPP")}</p>
                     </div>
 
                     <div className="text-center">
                         <p className="text-sm border-b border-gray-600 mb-1 font-bold italic font-serif text-gray-800 px-4">
                             Dr. {record.doctor.name}
                         </p>
-                        <p className="text-[10px] text-gray-500 uppercase tracking-tighter">Authorized Signature</p>
+                        <p className="text-[10px] text-gray-500  tracking-tighter">Authorized Signature</p>
                     </div>
                 </div>
             </div>
@@ -138,9 +138,9 @@ const MedicalRecordPage = () => {
 
 const Field = ({ label, value }: { label: string; value: string }) => (
     <div className="border-l-2 border-gray-100 pl-4 mb-1">
-        <p className="text-gray-400 text-[10px] font-bold uppercase tracking-widest mb-2">{label}</p>
-        <p className="whitespace-pre-line text-sm text-gray-800 leading-tight">{value}</p>
+        <p className="text-gray-500 text-[11px] font-bold uppercase tracking-widest mb-2">{label}</p>
+        <p className="whitespace-pre-line text-xs  leading-tight">{value}</p>
     </div>
 );
 
-export default MedicalRecordPage;
+export default PrescriptionPage;

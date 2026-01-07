@@ -158,13 +158,16 @@ export interface MedicalRecordRequest {
     followUpDate?: string;
 }
 
-export interface MedicalRecordResponse {
+export interface MedicalRecordSummaryResponse {
     id: number;
     doctor: BaseDoctorResponse;
     patient: PatientSummaryResponse;
     appointment: AppointmentSummaryResponse;
-    symptoms: string;
     diagnosis: string;
+    createdAt: string;
+}
+export interface MedicalRecordResponse extends MedicalRecordSummaryResponse {
+    symptoms: string;
     prescription: string;
     treatment?: string;
     followUpDate?: string;
@@ -172,6 +175,7 @@ export interface MedicalRecordResponse {
     pulse?: number;
     bpSystolic?: number;
     bpDiastolic?: number;
+    createdAt: string;
 }
 
 export interface BillResponse {

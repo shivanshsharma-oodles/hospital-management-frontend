@@ -7,7 +7,7 @@ import { showError } from "@/utils/toast";
 import type { SlotResponseType } from "@/types";
 import { deleteSlot, fetchMySlots } from "@/services/spring-apis/doctor.service";
 import BaseDialogModal from "@/components/common/baseComp/BaseDialogModal";
-import { sortSlotByDateTime } from "@/utils/sortSlotsByDateTime";
+import { sortSlotByDateTime } from "@/utils/sort/sortSlotsByDateTime";
 
 const DoctorSlotsPage = () => {
     // 1. Local State for Data

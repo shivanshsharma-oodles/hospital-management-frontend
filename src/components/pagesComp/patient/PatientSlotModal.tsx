@@ -8,7 +8,7 @@ import { getSlotsByDoctorId } from "@/services/spring-apis/common.service";
 import { formatTime } from "@/utils/formatTime";
 import { format } from "date-fns";
 import type { SlotResponseType } from "@/types";
-import { sortSlotByDateTime } from "@/utils/sortSlotsByDateTime";
+import { sortSlotByDateTime } from "@/utils/sort/sortSlotsByDateTime";
 
 interface SlotModalProps {
     open: boolean;

@@ -12,7 +12,7 @@ import { Check, X, Eye, CheckCircle, } from "lucide-react";
 import type { AppointmentResponse, AppointmentStatus } from "@/types";
 import { formatTime } from "@/utils/formatTime";
 import { format } from "date-fns";
-import { sortAppointmentsByDateTime } from "@/utils/sortAppointmentsByDateTime";
+import { sortAppointmentsByDateTime } from "@/utils/sort/sortAppointmentsByDateTime";
 
 // Role type define kar diya clarity ke liye
 type UserRole = "DOCTOR" | "PATIENT";
