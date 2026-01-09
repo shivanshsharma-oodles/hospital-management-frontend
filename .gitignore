@@ -27,3 +27,5 @@ dist-ssr
 *.d.ts
 dist/
 build/
+
+patient.cy.ts

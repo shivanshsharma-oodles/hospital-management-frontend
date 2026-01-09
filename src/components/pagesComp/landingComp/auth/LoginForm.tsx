@@ -30,7 +30,6 @@ const LoginForm = () => {
         try {
             await login(payload);
             showSuccess("Login successful!", "login-success");
-            // Navigate to dashboard (Doctor/Patient]) after login
             
             navigate("/", { replace: true });
 

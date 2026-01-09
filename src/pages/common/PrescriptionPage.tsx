@@ -56,7 +56,7 @@ const PrescriptionPage = () => {
                         <div>
                             <h1 className="font-bold text-2xl tracking-tight text-gray-900">{APP.NAME}</h1>
                             <p className="text-sm font-medium text-brand uppercase tracking-wide">
-                                {record.doctor.department?.name || "General Medicine"}
+                                {record.doctor?.department?.name || "General Medicine"}
                             </p>
                         </div>
                     </div>

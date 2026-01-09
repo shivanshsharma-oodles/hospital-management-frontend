@@ -3,7 +3,7 @@ import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import AddDoctorSlots from "@/components/pagesComp/doctor/AddDoctorSlots";
 import DoctorSlots from "@/components/pagesComp/doctor/DoctorSlots";
-import { showError } from "@/utils/toast";
+import { showError, showSuccess } from "@/utils/toast";
 import type { SlotResponseType } from "@/types";
 import { deleteSlot, fetchMySlots } from "@/services/spring-apis/doctor.service";
 import BaseDialogModal from "@/components/common/baseComp/BaseDialogModal";
@@ -38,6 +38,7 @@ const DoctorSlotsPage = () => {
             setDeleteLoading(true);
             await deleteSlot(id);
             setSlots(prev => prev.filter(slot => slot.id !== id))
+            showSuccess("Slot Deleted Successfully", "delete-slot-success")
         } catch (error) {
             console.error(error);
             showError(error?.response?.data?.error || "Failed to delete slot", "delete-slot-error");

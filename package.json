@@ -7,7 +7,14 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "test:e2e": "cypress run --spec='cypress/e2e/**/*.cy.ts'",
+    "test:auth": "cypress run --spec='cypress/e2e/auth.cy.ts'",
+    "test:patient": "cypress run --spec='cypress/e2e/patient.cy.ts'",
+    "test:doctor": "cypress run --spec='cypress/e2e/doctor.cy.ts'",
+    "test:protected": "cypress run --spec='cypress/e2e/protected-routes.cy.ts'"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.11",

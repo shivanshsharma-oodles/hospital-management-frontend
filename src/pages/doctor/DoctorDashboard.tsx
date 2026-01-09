@@ -33,7 +33,7 @@ const DoctorDashboard = () => {
             <h2 className="text-xl font-semibold text-gray-900">Main Content Area</h2>
           </div>
           <div className="p-6 h-96">
-            {/* Your content will go here */}
+            {/* Content will go here */}
           </div>
         </div>
 
